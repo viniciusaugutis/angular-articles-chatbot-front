@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  padding: 10px;
+}
+
+$i:0;
+@while $i<=50 {
+  .m-t-#{$i} {
+      margin-top:#{$i}px !important;
+  }
+  .m-t--#{$i} {
+    margin-top:-#{$i}px !important;
+  }
+
+  .m-b-#{$i} {
+    margin-bottom:#{$i}px !important;
+  }
+  .m-b--#{$i} {
+    margin-bottom:-#{$i}px !important;
+  }
+
+  .m-r-#{$i} {
+    margin-right:#{$i}px !important;
+  }
+  .m-r--#{$i} {
+    margin-right:-#{$i}px !important;
+  }
+
+  .m-l-#{$i} {
+    margin-left:#{$i}px !important;
+  }
+  .m-l--#{$i} {
+    margin-left:-#{$i}px !important;
+  }
+
+  $i:$i+5;
+}
