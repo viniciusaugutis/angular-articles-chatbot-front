@@ -8,6 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { FormsModule } from '../../node_modules/@angular/forms';
 registerLocaleData(ptBr);
 
 const routes: Routes = [
@@ -20,9 +21,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, FormsModule],
   declarations: [],
   providers: [
     {

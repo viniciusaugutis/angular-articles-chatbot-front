@@ -1,8 +1,8 @@
-<div class="showChat_inner">
-  <div *ngFor="let message of conversation">
+<div class="showChat_inner" #scrollChat>
+  <div *ngFor="let message of conversation;">
     <div class="media chat-messages" *ngIf="message.isChatbot">
       <a class="media-left photo-table" href="javascript:">
-        <img class="media-object img-radius m-t-5 m-r-15" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
+        <img class="media-object img-radius img-chat" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
       </a>
       <div class="media-body chat-menu-content">
         <div class="">
@@ -10,18 +10,18 @@
           <p class="chat-time">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
         </div>
       </div>
-      <div class="media chat-messages" *ngIf="!message.isChatbot">
-        <div class="media-body chat-menu-reply">
-          <div class="">
-            <p class="chat-cont">{{message.text}}</p>
-            <p class="chat-time">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
-          </div>
+    </div>
+    <div class="media chat-messages" *ngIf="!message.isChatbot">
+      <div class="media-body chat-menu-reply">
+        <div class="">
+          <p class="chat-cont">{{message.text}}</p>
+          <p class="chat-time">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
         </div>
-        <div class="media-right photo-table">
-          <a href="javascript:">
-            <img class="media-object img-radius img-radius m-t-5" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
-          </a>
-        </div>
+      </div>
+      <div class="media-right photo-table">
+        <a href="javascript:">
+          <img class="media-object img-radius img-radius img-chat" src="assets/images/user-icon.jpg" alt="Generic placeholder image">
+        </a>
       </div>
     </div>
   </div>
@@ -32,12 +32,12 @@
       <div class="typing-indicator"></div>
     </div>
   </div>
-  <div class="chat-reply-box p-b-20">
-    <div class="right-icon-control">
-      <input type="text" class="form-control search-text" placeholder="Escreva aqui">
-      <div class="form-icon">
-        <i class="fa fa-paper-plane"></i>
-      </div>
+</div>
+<div class="chat-reply-box">
+  <div class="right-icon-control">
+    <input type="text" class="form-control search-text" placeholder="Escreva aqui" (keydown.enter)="sendMessage()" [(ngModel)]="textUser">
+    <div class="form-icon" (click)="sendMessage()">
+      <i class="fa fa-paper-plane"></i>
     </div>
   </div>
 </div>
