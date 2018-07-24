@@ -1,35 +1,36 @@
 <div class="showChat_inner" #scrollChat>
   <div *ngFor="let message of conversation;">
     <div class="media chat-messages" *ngIf="message.isChatbot">
-      <a class="media-left photo-table" href="javascript:">
-        <img class="media-object img-radius img-chat" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
+      <a class="media-left" href="javascript:">
+        <img class="img-radius img-chat" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
       </a>
       <div class="media-body chat-menu-content">
-        <div class="">
-          <p class="chat-cont">{{message.text}}</p>
-          <p class="chat-time">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
-        </div>
+        <p class="chat-cont">{{message.text}}</p>
+        <p class="chat-time pull-right">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
       </div>
     </div>
     <div class="media chat-messages" *ngIf="!message.isChatbot">
       <div class="media-body chat-menu-reply">
-        <div class="">
-          <p class="chat-cont">{{message.text}}</p>
-          <p class="chat-time">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
-        </div>
+        <p class="chat-cont">{{message.text}}</p>
+        <p class="chat-time pull-right">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
       </div>
       <div class="media-right photo-table">
         <a href="javascript:">
-          <img class="media-object img-radius img-radius img-chat" src="assets/images/user-icon.jpg" alt="Generic placeholder image">
+          <img class="img-radius img-radius img-chat" src="assets/images/user-icon.jpg" alt="Generic placeholder image">
         </a>
       </div>
     </div>
   </div>
-  <div class="result" *ngIf="loading">
-    <div class="typing-container">
-      <div class="typing-indicator"></div>
-      <div class="typing-indicator"></div>
-      <div class="typing-indicator"></div>
+  <div>
+    <div class="media chat-messages" *ngIf="loading">
+      <a class="media-left" href="javascript:">
+        <img class="img-radius img-chat" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
+      </a>
+      <div class="typing-container">
+        <div class="typing-indicator"></div>
+        <div class="typing-indicator"></div>
+        <div class="typing-indicator"></div>
+      </div>
     </div>
   </div>
 </div>

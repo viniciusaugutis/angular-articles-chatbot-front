@@ -4,3 +4,8 @@ export class Message {
   sendAt: Date;
   typeMessage: string;
 }
+
+export class UserApp {
+  name: string;
+  email: string;
+}

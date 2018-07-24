@@ -1,5 +1,6 @@
+import { ChatbotConversationScript, ChatConversationModel } from './../../shared/chatbot-conversation';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
-import { Message } from '../../model/model';
+import { Message, UserApp } from '../../model/model';
 
 @Component({
   selector: 'app-chat-conversation',
@@ -10,19 +11,23 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
 
   public loading: boolean;
   public conversation: Array<Message> = new Array<Message>();
+  public userApp: UserApp = new UserApp();
   public message: Message;
+  public messageAux: Message;
   public textUser: string;
+  public chatbotScriptConversation: ChatConversationModel[];
+  public indexScript: number;
 
   @ViewChild('scrollChat') private myScrollChat: ElementRef;
 
-  constructor() { }
+  constructor(public chatbotConversation: ChatbotConversationScript) { }
 
   ngOnInit() {
-    this.message = new Message();
-    this.message.text = 'Oi meu nome é Chatbot';
-    this.message.isChatbot = true;
-    this.message.sendAt = new Date();
+    this.indexScript = 0;
+    this.chatbotScriptConversation = this.chatbotConversation.getAll();
+    this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true);
     this.conversation.push(this.message);
+    this.verifyScriptChatbot();
     this.scrollToBottom();
   }
 
@@ -30,22 +35,29 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     if (this.loading) {
       return;
     }
-    this.message = new Message();
-    this.message.text = this.textUser;
-    this.message.isChatbot = false;
-    this.message.sendAt = new Date();
+    this.message = this.factoryMessage(this.textUser, false);
     this.conversation.push(this.message);
-    this.textUser = '';
 
+    if (this.chatbotScriptConversation[this.indexScript - 1] && this.chatbotScriptConversation[this.indexScript - 1].model) {
+      if (this.chatbotScriptConversation[this.indexScript - 1].model === 'name') {
+        this.userApp.name = this.textUser;
+      } else if (this.chatbotScriptConversation[this.indexScript - 1].model === 'email') {
+        this.userApp.email = this.textUser;
+      }
+    }
+
+    this.textUser = '';
     this.loading = true;
     setTimeout(() => {
-      this.message = new Message();
-      this.message.text = 'Tudo bem?';
-      this.message.isChatbot = true;
-      this.message.sendAt = new Date();
-      this.conversation.push(this.message);
-      this.loading = false;
-      window.scroll(0, 0);
+      if (this.chatbotScriptConversation[this.indexScript]) {
+        this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true);
+        this.conversation.push(this.message);
+        this.loading = false;
+        this.verifyScriptChatbot();
+      } else {
+        console.log(this.userApp);
+        console.log('FIMMM');
+      }
     }, 2000);
   }
 
@@ -61,6 +73,30 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     try {
       this.myScrollChat.nativeElement.scrollTop = this.myScrollChat.nativeElement.scrollHeight;
     } catch (err) { }
+  }
+
+  public factoryMessage(text: string, isChatbot: boolean, typeMessage?): Message {
+    this.messageAux = new Message();
+    this.messageAux.text = text;
+    this.messageAux.isChatbot = isChatbot;
+    this.messageAux.typeMessage = typeMessage ? typeMessage : 'default';
+    this.messageAux.sendAt = new Date();
+    return this.messageAux;
+  }
+
+  public verifyScriptChatbot(): void {
+    if (this.chatbotScriptConversation[this.indexScript].nextNow) {
+      this.indexScript++;
+      this.loading = true;
+      setTimeout(() => {
+        this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true);
+        this.conversation.push(this.message);
+        this.loading = false;
+        this.verifyScriptChatbot();
+      }, 3000);
+    } else {
+      this.indexScript++;
+    }
   }
 
 }

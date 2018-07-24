@@ -1,10 +1,11 @@
-import { ChatConversationComponent } from './pages/chat-conversation/chat-conversation.component';
-import { Error404Component } from './pages/error404/error404.component';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
+import { ChatbotConversationScript } from './shared/chatbot-conversation';
+import { ChatConversationComponent } from './pages/chat-conversation/chat-conversation.component';
+import { Error404Component } from './pages/error404/error404.component';
 
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
@@ -30,7 +31,8 @@ const routes: Routes = [
     {
       provide: LOCALE_ID,
       useValue: 'pt'
-    }
+    },
+    ChatbotConversationScript
   ]
 })
 export class AppRoutingModule { }
