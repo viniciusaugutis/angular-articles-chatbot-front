@@ -20,11 +20,11 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('scrollChat') private myScrollChat: ElementRef;
 
-  constructor(public chatbotConversation: ChatbotConversationScript) { }
+  constructor(public chatbotConversationScript: ChatbotConversationScript) { }
 
   ngOnInit() {
     this.indexScript = 0;
-    this.chatbotScriptConversation = this.chatbotConversation.getAll();
+    this.chatbotScriptConversation = this.chatbotConversationScript.getAll();
     this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true);
     this.conversation.push(this.message);
     this.verifyScriptChatbot();

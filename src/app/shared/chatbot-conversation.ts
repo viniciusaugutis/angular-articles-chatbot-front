@@ -8,8 +8,8 @@ export interface ChatConversationModel {
 
 const CHAT_CONVERSATION = [
   {
-    text: 'Olá, sou a Mel e fico feliz em poder te ajudar a escrever um artigo ' +
-    'que provavelmente irá ajudar e interessar a outras pessoas.',
+    text: (Math.random() * (100 - 1) + 1) > 50 ? 'Bom dia, sou a Mel e fico feliz em poder te ajudar a escrever um artigo '
+    : 'Boa Noite, sou a Mel e fico feliz em poder te ajudar a escrever um artigo que provavelmente irá ajudar e interessar a outras pessoas.',
     model: null,
     nextNow: true
   },

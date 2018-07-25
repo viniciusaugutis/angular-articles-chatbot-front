@@ -1,12 +1,11 @@
-<div>
-  <div class="row">
-    <div class="col-12 col-md-4">
-      <div class="panel">
-        <a routerLink="/chat">
-          <button class="btn btn-primary"> Iniciar entrevista</button>
-        </a>
-      </div>
-    </div>
+<div class="home-panel">
+  <img class="background-home" [src]="'assets/images/background-home.png'">
+  <div class="panel-interaction">
+    <a routerLink="/chat" class = "button-start">
+      <button class="btn">
+        <span>Iniciar entrevista</span>
+      </button>
+    </a>
+    <img class="icon" [src]="'assets/images/icon-home.png'">
   </div>
 </div>
-
