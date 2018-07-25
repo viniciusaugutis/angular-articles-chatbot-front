@@ -1,6 +1,7 @@
 import { ChatbotConversationScript, ChatConversationModel } from './../../shared/chatbot-conversation';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Message, UserApp } from '../../model/model';
+import { IOption } from '../../../../node_modules/ng-select';
 
 @Component({
   selector: 'app-chat-conversation',
@@ -18,6 +19,9 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
   public chatbotScriptConversation: ChatConversationModel[];
   public indexScript: number;
 
+  public categoryArticleOptions: Array<IOption> = [];
+  public categoryArticleSelected: any;
+
   @ViewChild('scrollChat') private myScrollChat: ElementRef;
 
   constructor(public chatbotConversationScript: ChatbotConversationScript) { }
@@ -25,10 +29,17 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.indexScript = 0;
     this.chatbotScriptConversation = this.chatbotConversationScript.getAll();
-    this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true);
+    this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage);
     this.conversation.push(this.message);
     this.verifyScriptChatbot();
     this.scrollToBottom();
+
+    this.categoryArticleOptions = [
+      {label: 'Arquitetura', value: '1'},
+      {label: 'Sustentabilidade', value: '2'},
+      {label: 'Paisagismo', value: '3'},
+      {label: 'Decoração', value: '4'}
+    ];
   }
 
   public sendMessage(text): void {
@@ -50,7 +61,7 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     this.loading = true;
     setTimeout(() => {
       if (this.chatbotScriptConversation[this.indexScript]) {
-        this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true);
+        this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage);
         this.conversation.push(this.message);
         this.loading = false;
         this.verifyScriptChatbot();
@@ -79,7 +90,7 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     this.messageAux = new Message();
     this.messageAux.text = text;
     this.messageAux.isChatbot = isChatbot;
-    this.messageAux.typeMessage = typeMessage ? typeMessage : 'default';
+    this.messageAux.typeMessage = typeMessage ? typeMessage : 'text';
     this.messageAux.sendAt = new Date();
     return this.messageAux;
   }
@@ -97,6 +108,16 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     } else {
       this.indexScript++;
     }
+  }
+
+  public messageChatbotAfterSelect(): void {
+    this.loading = true;
+    setTimeout(() => {
+      this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true);
+      this.conversation.push(this.message);
+      this.loading = false;
+      this.verifyScriptChatbot();
+    }, 3000);
   }
 
 }

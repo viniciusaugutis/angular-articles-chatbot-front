@@ -1,5 +1,5 @@
 <div class="chat-conversation-background">
-  <img class = "chat-conversation-background__img"  [src]="'assets/images/background-chat.png'">
+  <img class="chat-conversation-background__img" [src]="'assets/images/background-chat.png'">
   <div class="showChat_inner" #scrollChat>
     <div *ngFor="let message of conversation;">
       <div class="media chat-messages" *ngIf="message.isChatbot">
@@ -7,7 +7,10 @@
           <img class="img-radius img-chat" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
         </a>
         <div class="media-body chat-menu-content">
-          <p class="chat-cont">{{message.text}}</p>
+          <p class="chat-cont" *ngIf="message.typeMessage == 'text'">{{message.text}}</p>
+          <ng-select [options]="categoryArticleOptions" class="simple p-10" [(ngModel)]="categoryArticleSelected" notFoundMsg="Categoria não encontrada"
+            (selected)="messageChatbotAfterSelect();" [placeholder]="'Selecione um tema para o artigo'" autocomplete="off"
+            *ngIf="message.typeMessage == 'select'"></ng-select>
           <p class="chat-time pull-right">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
         </div>
       </div>

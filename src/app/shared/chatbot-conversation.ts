@@ -4,6 +4,7 @@ export interface ChatConversationModel {
   text: string;
   model: string;
   nextNow: boolean;
+  typeMessage: string;
 }
 
 const CHAT_CONVERSATION = [
@@ -11,23 +12,45 @@ const CHAT_CONVERSATION = [
     text: (Math.random() * (100 - 1) + 1) > 50 ? 'Bom dia, sou a Mel e fico feliz em poder te ajudar a escrever um artigo '
     : 'Boa Noite, sou a Mel e fico feliz em poder te ajudar a escrever um artigo que provavelmente irá ajudar e interessar a outras pessoas.',
     model: null,
-    nextNow: true
+    nextNow: true,
+    typeMessage: 'text'
   },
   {
     text: 'Para iniciarmos, preciso te conhecer um pouco mais…',
     model: null,
-    nextNow: true
+    nextNow: true,
+    typeMessage: 'text'
   },
   {
     text: 'Qual é o seu nome?',
     model: 'name',
-    nextNow: false
+    nextNow: false,
+    typeMessage: 'text'
   },
   {
     text: 'Qual é o seu email?',
     model: 'email',
-    nextNow: false
-  }
+    nextNow: false,
+    typeMessage: 'text'
+  },
+  {
+    text: 'Escolha um tema para o seu artigo.',
+    model: 'category',
+    nextNow: false,
+    typeMessage: 'select'
+  },
+  {
+    text: 'A categoria X é bem pesquisado na internet, cerca de Y pessoas buscam sobre isso todos os meses.',
+    model: null,
+    nextNow: true,
+    typeMessage: 'text'
+  },
+  {
+    text: 'Vamos começar?',
+    model: null,
+    nextNow: false,
+    typeMessage: 'text'
+  },
 
 ];
 
