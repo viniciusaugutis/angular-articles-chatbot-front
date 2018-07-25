@@ -57,3 +57,17 @@ $i:0;
 .p-10 {
   padding: 10px;
 }
+
+ng-select.simple > div {
+  min-height: 45px;
+
+  border-color: #cccccc !important;
+
+  > div.single {
+    > div.placeholder,
+    > div.toggle,
+    > div.value {
+      line-height: 40px !important;
+    }
+  }
+}
