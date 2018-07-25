@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HomeComponent } from './pages/home/home.component';
-import { Error404Component } from './pages/error404/error404.component';
 import { ChatConversationComponent } from './pages/chat-conversation/chat-conversation.component';
 import { ChatQuestionsComponent } from './pages/chat-questions/chat-questions.component';
 
@@ -18,7 +17,6 @@ import { ChatQuestionsComponent } from './pages/chat-questions/chat-questions.co
   declarations: [
     AppComponent,
     HomeComponent,
-    Error404Component,
     ChatConversationComponent,
     ChatQuestionsComponent
   ],
