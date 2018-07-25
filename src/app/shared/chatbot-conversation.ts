@@ -28,7 +28,7 @@ const CHAT_CONVERSATION = [
     typeMessage: 'text'
   },
   {
-    text: 'Qual é o seu email?',
+    text: 'qual é o seu email?',
     model: 'email',
     nextNow: false,
     typeMessage: 'text'
@@ -40,16 +40,16 @@ const CHAT_CONVERSATION = [
     typeMessage: 'select'
   },
   {
-    text: 'A categoria X é bem pesquisado na internet, cerca de Y pessoas buscam sobre isso todos os meses.',
-    model: null,
+    text: 'A categoria X é bem pesquisada na internet, cerca de Y pessoas buscam sobre isso todos os meses.',
+    model: 'category-result',
     nextNow: true,
     typeMessage: 'text'
   },
   {
     text: 'Vamos começar?',
-    model: null,
+    model: 'go-questions',
     nextNow: false,
-    typeMessage: 'text'
+    typeMessage: 'text-button'
   },
 
 ];

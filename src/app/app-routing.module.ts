@@ -1,3 +1,4 @@
+import { ChatQuestionsComponent } from './pages/chat-questions/chat-questions.component';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,6 +15,7 @@ registerLocaleData(ptBr);
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'chat', component: ChatConversationComponent },
+  { path: 'chat-perguntas', component: ChatQuestionsComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: HomeComponent }
 ];

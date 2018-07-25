@@ -3,6 +3,7 @@ export class Message {
   isChatbot: boolean;
   sendAt: Date;
   typeMessage: string;
+  model: string;
 }
 
 export class UserApp {

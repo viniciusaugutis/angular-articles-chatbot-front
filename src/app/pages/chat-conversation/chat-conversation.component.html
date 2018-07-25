@@ -8,8 +8,18 @@
         </a>
         <div class="media-body chat-menu-content">
           <p class="chat-cont" *ngIf="message.typeMessage == 'text'">{{message.text}}</p>
+          <div *ngIf="message.typeMessage == 'text-button'" class="chat-cont">
+            <p>{{message.text}}</p>
+            <a routerLink="/chat-perguntas" *ngIf="message.model === 'go-questions'">
+              <div class="text-center">
+                <button class="btn btn-primary">
+                  <span>Só vamos!</span>
+                </button>
+              </div>
+            </a>
+          </div>
           <ng-select [options]="categoryArticleOptions" class="simple p-10" [(ngModel)]="categoryArticleSelected" notFoundMsg="Categoria não encontrada"
-            (selected)="messageChatbotAfterSelect();" [placeholder]="'Selecione um tema para o artigo'" autocomplete="off"
+            (selected)="messageChatbotAfterSelect();" [placeholder]="'Selecione um tema para o seu artigo'" autocomplete="off"
             *ngIf="message.typeMessage == 'select'"></ng-select>
           <p class="chat-time pull-right">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
         </div>

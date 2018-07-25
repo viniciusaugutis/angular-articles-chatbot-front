@@ -29,16 +29,17 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.indexScript = 0;
     this.chatbotScriptConversation = this.chatbotConversationScript.getAll();
-    this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage);
+    this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage,
+      this.chatbotScriptConversation[this.indexScript].model);
     this.conversation.push(this.message);
     this.verifyScriptChatbot();
     this.scrollToBottom();
 
     this.categoryArticleOptions = [
-      {label: 'Arquitetura', value: '1'},
-      {label: 'Sustentabilidade', value: '2'},
-      {label: 'Paisagismo', value: '3'},
-      {label: 'Decoração', value: '4'}
+      { label: 'Arquitetura', value: '1' },
+      { label: 'Sustentabilidade', value: '2' },
+      { label: 'Paisagismo', value: '3' },
+      { label: 'Decoração', value: '4' }
     ];
   }
 
@@ -60,8 +61,14 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     this.textUser = '';
     this.loading = true;
     setTimeout(() => {
-      if (this.chatbotScriptConversation[this.indexScript]) {
-        this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage);
+      const auxScript = this.chatbotScriptConversation[this.indexScript];
+      if (auxScript) {
+        switch (auxScript.model) {
+          case 'email':
+            auxScript.text = `${this.userApp.name}, ${auxScript.text}`;
+            break;
+        }
+        this.message = this.factoryMessage(auxScript.text, true, auxScript.typeMessage, auxScript.model);
         this.conversation.push(this.message);
         this.loading = false;
         this.verifyScriptChatbot();
@@ -86,11 +93,12 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     } catch (err) { }
   }
 
-  public factoryMessage(text: string, isChatbot: boolean, typeMessage?): Message {
+  public factoryMessage(text: string, isChatbot: boolean, typeMessage?, modelAffect?): Message {
     this.messageAux = new Message();
     this.messageAux.text = text;
     this.messageAux.isChatbot = isChatbot;
     this.messageAux.typeMessage = typeMessage ? typeMessage : 'text';
+    this.messageAux.model = modelAffect ? modelAffect : null;
     this.messageAux.sendAt = new Date();
     return this.messageAux;
   }
@@ -100,11 +108,12 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
       this.indexScript++;
       this.loading = true;
       setTimeout(() => {
-        this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true);
+        this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage,
+          this.chatbotScriptConversation[this.indexScript].model);
         this.conversation.push(this.message);
         this.loading = false;
         this.verifyScriptChatbot();
-      }, 3000);
+      }, 2000);
     } else {
       this.indexScript++;
     }
@@ -112,12 +121,23 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
 
   public messageChatbotAfterSelect(): void {
     this.loading = true;
+
+    switch (this.chatbotScriptConversation[this.indexScript].model) {
+      case 'category-result':
+        this.categoryArticleOptions.forEach(element => {
+          if (element.value === this.categoryArticleSelected) {
+            this.chatbotScriptConversation[this.indexScript].text = this.chatbotScriptConversation[this.indexScript].text.replace('X', element.label);
+          }
+        });
+        break;
+    }
     setTimeout(() => {
-      this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true);
+      this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true,
+        this.chatbotScriptConversation[this.indexScript].typeMessage, this.chatbotScriptConversation[this.indexScript].model);
       this.conversation.push(this.message);
       this.loading = false;
       this.verifyScriptChatbot();
-    }, 3000);
+    }, 2000);
   }
 
 }
