@@ -20,4 +20,10 @@ export class Question {
   id: string;
   name: string;
   questionCategoryId: string;
+  questionKeywords: Array<QuestionKeyword>;
+}
+
+export class QuestionKeyword {
+  id: string;
+  name: string;
 }

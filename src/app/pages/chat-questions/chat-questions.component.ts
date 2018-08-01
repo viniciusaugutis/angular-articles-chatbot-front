@@ -26,6 +26,11 @@ export class ChatQuestionsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
+
     this.contentToEditor = '';
 
     this.route
@@ -38,7 +43,6 @@ export class ChatQuestionsComponent implements OnInit {
   }
 
   public nextQuestion(answeredQuestion: boolean) {
-    console.log('veio');
     if (answeredQuestion && this.responseUserText) {
       this.contentToEditor = this.contentToEditor.concat('<h2>' + this.questions[this.indexQuestion].name +
         '</h2>' + '<p>' + this.responseUserText + '</p><br/>');

@@ -28,19 +28,25 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
               public questionCategoryService: QuestionCategoryService) { }
 
   ngOnInit() {
-    this.indexScript = 3;
-    this.chatbotScriptConversation = this.chatbotConversationScript.getAll();
-    this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage,
-      this.chatbotScriptConversation[this.indexScript].model);
-    this.conversation.push(this.message);
-    this.verifyScriptChatbot();
-    this.scrollToBottom();
 
-    this.categoryArticleOptions = this.questionCategoryService.findAll().subscribe(data => {
-      this.categoryArticleOptions = data.map(
-        category => ({ label: category.name, value: category.id.toString() })
-      );
-    });
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+      this.indexScript = 0;
+      this.chatbotScriptConversation = this.chatbotConversationScript.getAll();
+      this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage,
+        this.chatbotScriptConversation[this.indexScript].model);
+      this.conversation.push(this.message);
+      this.verifyScriptChatbot();
+      this.scrollToBottom();
+
+      this.categoryArticleOptions = this.questionCategoryService.findAll().subscribe(data => {
+        this.categoryArticleOptions = data.map(
+          category => ({ label: category.name, value: category.id.toString() })
+        );
+      });
+    }, 2000);
+
   }
 
   public sendMessage(text): void {

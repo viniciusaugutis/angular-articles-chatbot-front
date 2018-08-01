@@ -34,14 +34,17 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
       <textarea rows="18" class="form-control note-editor note-editor-margin" [(ngModel)]="responseUserText" [disabled]="!enableQuestion"></textarea>
       <div class="note-editor__count-words" *ngIf = "responseUserText">
         <p [ngClass]="responseUserText?.length >= 20 ? 'color-green' : 'color-red'">{{responseUserText?.length}} letras</p>
       </div>
     </div>
-    <div class="col-md-4 b-l-gray text-center">
-      <h6 class="text-subl">Dicas de palavras chaves para usar na sua resposta</h6>
+    <div class="col-md-3 b-l-gray text-center">
+      <h6 class="text-subl">Dicas de palavras chaves para utilizar</h6>
+      <p *ngFor="let keyword of questions[indexQuestion]?.questionKeywords" class = "m-b-5">
+        <span [ngClass]="responseUserText && responseUserText?.toLowerCase().indexOf(keyword.name.toLowerCase()) != -1 ? 'color-green' : 'color-red'">{{keyword.name}}</span>
+      </p>
     </div>
   </div>
 </div>
