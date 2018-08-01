@@ -1,6 +1,47 @@
 <div class="p-10">
-  <div class="text-center">
-    <h4>Por que escolheu esse tema?</h4>
+  <div *ngIf="!loading">
+    <div class="media chat-messages">
+      <a class="media-left p-relative" href="javascript:">
+        <img class="img-radius img-chat m-t--10" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
+      </a>
+      <div class="media-body chat-menu-content m-t-10">
+        <p class="chat-cont">{{questions[indexQuestion]?.name}}</p>
+      </div>
+    </div>
+    <div class="text-center m-t--10 m-b-10">
+      <button class="btn btn-primary cursor-pointer" (click)="enableQuestion ? nextQuestion(true) : (enableQuestion = true)" [disabled]="enableQuestion && responseUserText?.length < 20 ">
+        <i class="fa m-r-5" [ngClass]="enableQuestion ? 'fa-arrow-right' : 'fa-check'"></i>
+        {{enableQuestion ? 'Próxima' : 'Responder'}}
+      </button>
+      <button class="btn btn-danger cursor-pointer" (click)="nextQuestion(false)">
+        <i class="fa fa-times m-r-5"></i>
+        Pular
+      </button>
+      <button class="btn btn-success cursor-pointer" *ngIf="contQuestionAnswered >= 2" (click)="finishArticle()">
+        <i class="fa fa-flag-checkered m-r-5"></i>
+        Concluir
+      </button>
+    </div>
   </div>
-  <textarea rows="30" class="form-control note-editor note-editor-margin"></textarea>
+  <div class="media chat-messages" *ngIf="loading">
+    <a class="media-left p-relative" href="javascript:">
+      <img class="img-radius img-chat" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
+    </a>
+    <div class="typing-container">
+      <div class="typing-indicator"></div>
+      <div class="typing-indicator"></div>
+      <div class="typing-indicator"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <textarea rows="18" class="form-control note-editor note-editor-margin" [(ngModel)]="responseUserText" [disabled]="!enableQuestion"></textarea>
+      <div class="note-editor__count-words" *ngIf = "responseUserText">
+        <p [ngClass]="responseUserText?.length >= 20 ? 'color-green' : 'color-red'">{{responseUserText?.length}} letras</p>
+      </div>
+    </div>
+    <div class="col-md-4 b-l-gray text-center">
+      <h6 class="text-subl">Dicas de palavras chaves para usar na sua resposta</h6>
+    </div>
+  </div>
 </div>

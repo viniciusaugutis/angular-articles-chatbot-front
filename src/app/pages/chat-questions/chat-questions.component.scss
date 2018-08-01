@@ -15,8 +15,33 @@
   padding: 0;
   padding-bottom: 1px;
   border: none;
+
+  .note-editor__count-words {
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
 }
 
 .note-editor:focus {
   box-shadow: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.b-l-gray {
+  border-left: 2px solid gray;
+}
+
+.text-subl {
+  text-decoration: underline;
+}
+
+.color-red {
+  color: red;
+}
+
+.color-green {
+  color: green;
 }

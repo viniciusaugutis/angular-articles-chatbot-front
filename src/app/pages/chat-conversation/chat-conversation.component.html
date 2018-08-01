@@ -10,7 +10,7 @@
           <p class="chat-cont" *ngIf="message.typeMessage == 'text'">{{message.text}}</p>
           <div *ngIf="message.typeMessage == 'text-button'" class="chat-cont">
             <p>{{message.text}}</p>
-            <a routerLink="/chat-perguntas" *ngIf="message.model === 'go-questions'">
+            <a [routerLink]="['/chat-perguntas']" [queryParams]="{categoryArticle: categoryArticleSelected }" *ngIf="message.model === 'go-questions'">
               <div class="text-center">
                 <button class="btn btn-primary c-pointer">
                   <span>Só vamos!</span>

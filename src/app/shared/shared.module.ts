@@ -5,15 +5,23 @@ import { NgbModule, NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { SelectModule } from 'ng-select';
+import { HttpClientModule } from '../../../node_modules/@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     NgbModule.forRoot(),
     AngularFontAwesomeModule,
-    SelectModule
+    SelectModule,
+    HttpClientModule
   ],
   declarations: [],
-  exports: [NgbModule, AngularFontAwesomeModule, NgbAccordion, SelectModule]
+  exports: [
+    NgbModule,
+    AngularFontAwesomeModule,
+    NgbAccordion,
+    SelectModule,
+    HttpClientModule
+  ]
 })
 export class SharedModule { }

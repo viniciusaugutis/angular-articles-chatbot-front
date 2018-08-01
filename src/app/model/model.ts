@@ -10,3 +10,14 @@ export class UserApp {
   name: string;
   email: string;
 }
+
+export class QuestionCategory {
+  id: string;
+  name: string;
+}
+
+export class Question {
+  id: string;
+  name: string;
+  questionCategoryId: string;
+}
