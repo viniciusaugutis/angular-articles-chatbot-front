@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NgbModule, NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { QuillModule } from 'ngx-quill';
 
 import { SelectModule } from 'ng-select';
 import { HttpClientModule } from '../../../node_modules/@angular/common/http';
@@ -13,7 +14,8 @@ import { HttpClientModule } from '../../../node_modules/@angular/common/http';
     NgbModule.forRoot(),
     AngularFontAwesomeModule,
     SelectModule,
-    HttpClientModule
+    HttpClientModule,
+    QuillModule
   ],
   declarations: [],
   exports: [
@@ -21,7 +23,8 @@ import { HttpClientModule } from '../../../node_modules/@angular/common/http';
     AngularFontAwesomeModule,
     NgbAccordion,
     SelectModule,
-    HttpClientModule
+    HttpClientModule,
+    QuillModule
   ]
 })
 export class SharedModule { }

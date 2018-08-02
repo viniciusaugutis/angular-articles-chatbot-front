@@ -1,4 +1,4 @@
-<div class="chat-conversation-background">
+<div class="chat-conversation-background" *ngIf = "!showEditArticle">
   <img class="chat-conversation-background__img" [src]="'assets/images/background-chat.png'">
   <div class="showChat_inner" #scrollChat>
     <div *ngFor="let message of conversation;">
@@ -60,3 +60,5 @@
     </div>
   </div>
 </div>
+
+<app-edit-article *ngIf = "showEditArticle"></app-edit-article>

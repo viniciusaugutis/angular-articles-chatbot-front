@@ -12,6 +12,7 @@ import { ChatConversationComponent } from './pages/chat-conversation/chat-conver
 import { ChatQuestionsComponent } from './pages/chat-questions/chat-questions.component';
 import { CoreModule } from './core/core.module';
 import { ChatFeedbackComponent } from './pages/chat-feedback/chat-feedback.component';
+import { EditArticleComponent } from './pages/edit-article/edit-article.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ChatFeedbackComponent } from './pages/chat-feedback/chat-feedback.compo
     HomeComponent,
     ChatConversationComponent,
     ChatQuestionsComponent,
-    ChatFeedbackComponent
+    ChatFeedbackComponent,
+    EditArticleComponent
   ],
   imports: [
     BrowserModule,

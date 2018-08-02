@@ -1,0 +1,9 @@
+<div class="col-12">
+  <div class="card m-t-10">
+    <div class="card-block">
+      <quill-editor [modules]="editor_modules" name="content" [(ngModel)]="content" [style]="{'height': '100%', 'min-height' : '350px'}"
+        (onEditorCreated)="onEditorCreated($event)" placeholder="Insira seu conteúdo aqui" #editor>
+      </quill-editor>
+    </div>
+  </div>
+</div>

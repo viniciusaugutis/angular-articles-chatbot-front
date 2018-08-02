@@ -1,7 +1,7 @@
 import { Question } from './../../model/model';
 import { QuestionService } from './../../api/question.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-chat-questions',
@@ -21,7 +21,8 @@ export class ChatQuestionsComponent implements OnInit {
   public responseUserText: string;
 
   constructor(public questionService: QuestionService,
-    public route: ActivatedRoute) {
+    public route: ActivatedRoute,
+    public router: Router) {
   }
 
   ngOnInit() {
@@ -58,6 +59,7 @@ export class ChatQuestionsComponent implements OnInit {
 
   public finishArticle() {
     console.log(this.contentToEditor);
+    this.router.navigate(['/chat-feedback']);
   }
 
 }

@@ -1,3 +1,4 @@
+import { EditArticleComponent } from './pages/edit-article/edit-article.component';
 import { ChatFeedbackComponent } from './pages/chat-feedback/chat-feedback.component';
 import { ChatQuestionsComponent } from './pages/chat-questions/chat-questions.component';
 import { NgModule, LOCALE_ID } from '@angular/core';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatConversationComponent },
   { path: 'chat-perguntas', component: ChatQuestionsComponent},
   { path: 'chat-feedback', component: ChatFeedbackComponent },
+  { path: 'editor-artigo', component: EditArticleComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: HomeComponent }
 ];
