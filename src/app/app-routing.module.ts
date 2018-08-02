@@ -1,3 +1,4 @@
+import { ChatFeedbackComponent } from './pages/chat-feedback/chat-feedback.component';
 import { ChatQuestionsComponent } from './pages/chat-questions/chat-questions.component';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'chat', component: ChatConversationComponent },
   { path: 'chat-perguntas', component: ChatQuestionsComponent},
+  { path: 'chat-feedback', component: ChatFeedbackComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: HomeComponent }
 ];

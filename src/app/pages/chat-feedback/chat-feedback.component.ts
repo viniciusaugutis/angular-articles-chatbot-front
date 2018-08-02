@@ -2,30 +2,28 @@ import { ChatbotConversationScript, ChatConversationModel } from './../../shared
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Message, UserApp } from '../../model/model';
 import { QuestionCategoryService } from './../../api/question-category.service';
-
+import { Router } from '../../../../node_modules/@angular/router';
 @Component({
-  selector: 'app-chat-conversation',
-  templateUrl: './chat-conversation.component.html',
-  styleUrls: ['./chat-conversation.component.scss']
+  selector: 'app-chat-feedback',
+  templateUrl: './chat-feedback.component.html',
+  styleUrls: ['./chat-feedback.component.scss',
+              '../chat-conversation/chat-conversation.component.scss']
 })
-export class ChatConversationComponent implements OnInit, AfterViewChecked {
-
+export class ChatFeedbackComponent implements OnInit, AfterViewChecked {
   public loading: boolean;
+  public loadingActionArticle: boolean;
   public conversation: Array<Message> = new Array<Message>();
-  public userApp: UserApp = new UserApp();
   public message: Message;
   public messageAux: Message;
   public textUser: string;
   public chatbotScriptConversation: ChatConversationModel[];
   public indexScript: number;
-
-  public categoryArticleOptions: any;
-  public categoryArticleSelected: any;
+  public questionFeedbackFromUser: string;
 
   @ViewChild('scrollChat') private myScrollChat: ElementRef;
 
   constructor(public chatbotConversationScript: ChatbotConversationScript,
-              public questionCategoryService: QuestionCategoryService) { }
+              public router: Router) { }
 
   ngOnInit() {
 
@@ -33,18 +31,12 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     setTimeout(() => {
       this.loading = false;
       this.indexScript = 0;
-      this.chatbotScriptConversation = this.chatbotConversationScript.getScriptConversation();
+      this.chatbotScriptConversation = this.chatbotConversationScript.getFeedbackConversation();
       this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage,
         this.chatbotScriptConversation[this.indexScript].model);
       this.conversation.push(this.message);
       this.verifyScriptChatbot();
       this.scrollToBottom();
-
-      this.categoryArticleOptions = this.questionCategoryService.findAll().subscribe(data => {
-        this.categoryArticleOptions = data.map(
-          category => ({ label: category.name, value: category.id.toString() })
-        );
-      });
     }, 2000);
 
   }
@@ -57,10 +49,8 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     this.conversation.push(this.message);
 
     if (this.chatbotScriptConversation[this.indexScript - 1] && this.chatbotScriptConversation[this.indexScript - 1].model) {
-      if (this.chatbotScriptConversation[this.indexScript - 1].model === 'name') {
-        this.userApp.name = this.textUser;
-      } else if (this.chatbotScriptConversation[this.indexScript - 1].model === 'email') {
-        this.userApp.email = this.textUser;
+      if (this.chatbotScriptConversation[this.indexScript - 1].model === 'question-feedback') {
+        this.questionFeedbackFromUser = this.textUser;
       }
     }
 
@@ -69,18 +59,10 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     setTimeout(() => {
       const auxScript = this.chatbotScriptConversation[this.indexScript];
       if (auxScript) {
-        switch (auxScript.model) {
-          case 'email':
-            auxScript.text = `${this.userApp.name}, ${auxScript.text}`;
-            break;
-        }
         this.message = this.factoryMessage(auxScript.text, true, auxScript.typeMessage, auxScript.model);
         this.conversation.push(this.message);
         this.loading = false;
         this.verifyScriptChatbot();
-      } else {
-        console.log(this.userApp);
-        console.log('FIMMM');
       }
     }, 2000);
   }
@@ -119,31 +101,19 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
         this.conversation.push(this.message);
         this.loading = false;
         this.verifyScriptChatbot();
+        if (this.chatbotScriptConversation[this.indexScript - 1] && this.chatbotScriptConversation[this.indexScript - 1].model) {
+          if (this.chatbotScriptConversation[this.indexScript - 1].model === 'go-article') {
+            this.loadingActionArticle = true;
+            setTimeout(() => {
+              this.router.navigate(['/chat-perguntas']);
+            }, 3000);
+          }
+        }
+
       }, 2000);
     } else {
       this.indexScript++;
     }
-  }
-
-  public messageChatbotAfterSelect(): void {
-    this.loading = true;
-
-    switch (this.chatbotScriptConversation[this.indexScript].model) {
-      case 'category-result':
-        this.categoryArticleOptions.forEach(element => {
-          if (element.value === this.categoryArticleSelected) {
-            this.chatbotScriptConversation[this.indexScript].text = this.chatbotScriptConversation[this.indexScript].text.replace('X', element.label);
-          }
-        });
-        break;
-    }
-    setTimeout(() => {
-      this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true,
-        this.chatbotScriptConversation[this.indexScript].typeMessage, this.chatbotScriptConversation[this.indexScript].model);
-      this.conversation.push(this.message);
-      this.loading = false;
-      this.verifyScriptChatbot();
-    }, 2000);
   }
 
 }

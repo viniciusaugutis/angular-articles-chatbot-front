@@ -9,8 +9,7 @@ export interface ChatConversationModel {
 
 const CHAT_CONVERSATION = [
   {
-    text: (Math.random() * (100 - 1) + 1) > 50 ? 'Bom dia, sou a Mel e fico feliz em poder te ajudar a escrever um artigo '
-    : 'Boa Noite, sou a Mel e fico feliz em poder te ajudar a escrever um artigo que provavelmente irá ajudar e interessar a outras pessoas.',
+    text: 'Olá, sou a Mel e fico feliz em poder te ajudar a escrever um artigo que provavelmente irá ajudar e interessar a outras pessoas.',
     model: null,
     nextNow: true,
     typeMessage: 'text'
@@ -54,9 +53,46 @@ const CHAT_CONVERSATION = [
 
 ];
 
+const CHAT_CONVERSATION_FEEDBACK = [
+  {
+    text: 'Parabéns! A edição do seu artigo está pronta. Já te envio para lá!',
+    model: null,
+    nextNow: true,
+    typeMessage: 'text'
+  },
+  {
+    text: 'Você sentiu falta de alguma pergunta sobre o tema, que não te foi feita? Se sim, escreva no chat agora para nos ajudar a aprimorar sempre mais.' +
+    ' Se não, clique no botão para continuar.',
+    model: 'question-feedback',
+    nextNow: false,
+    typeMessage: 'text-button'
+  },
+  {
+    text: 'Agora você pode adicionar imagens ou editar o seu texto no layout de edição.',
+    model: null,
+    nextNow: true,
+    typeMessage: 'text'
+  },
+  {
+    text: 'Ahhh… Quero te lembrar que se você adicionar imagens no seu artigo, suas chances de atrair mais clientes aumentam.',
+    model: null,
+    nextNow: true,
+    typeMessage: 'text'
+  },
+  {
+    text: '  Estou te enviando para lá… Foi um prazer e espero te ver mais vezes aqui! Byeeeee',
+    model: 'go-article',
+    nextNow: false,
+    typeMessage: 'text-button'
+  },
+];
+
 @Injectable()
 export class ChatbotConversationScript {
-  getAll(): ChatConversationModel[] {
+  getScriptConversation(): ChatConversationModel[] {
     return CHAT_CONVERSATION;
+  }
+  getFeedbackConversation(): ChatConversationModel[] {
+    return CHAT_CONVERSATION_FEEDBACK;
   }
 }

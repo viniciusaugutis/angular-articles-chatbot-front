@@ -11,13 +11,15 @@ import { HomeComponent } from './pages/home/home.component';
 import { ChatConversationComponent } from './pages/chat-conversation/chat-conversation.component';
 import { ChatQuestionsComponent } from './pages/chat-questions/chat-questions.component';
 import { CoreModule } from './core/core.module';
+import { ChatFeedbackComponent } from './pages/chat-feedback/chat-feedback.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ChatConversationComponent,
-    ChatQuestionsComponent
+    ChatQuestionsComponent,
+    ChatFeedbackComponent
   ],
   imports: [
     BrowserModule,
