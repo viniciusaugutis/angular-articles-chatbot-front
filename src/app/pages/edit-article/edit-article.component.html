@@ -1,9 +1,38 @@
-<div class="col-12">
-  <div class="card m-t-10">
-    <div class="card-block">
-      <quill-editor [modules]="editor_modules" name="content" [(ngModel)]="content" [style]="{'height': '100%', 'min-height' : '350px'}"
-        (onEditorCreated)="onEditorCreated($event)" placeholder="Insira seu conteúdo aqui" #editor>
-      </quill-editor>
+<div class="p-10">
+  <h3 class="edit-article__title">Título e conteúdo do artigo</h3>
+  <div class="row">
+    <div class="col-12">
+      <input type="text" [(ngModel)]="article.title" class="form-control" name="title" placeholder="Título do seu artigo" autocomplete="off"
+        required minlength="5" #title="ngModel" />
     </div>
+    <div class="col-12">
+      <div class="card m-t-10">
+        <div class="card-block">
+          <quill-editor [modules]="editor_modules" name="content" [(ngModel)]="article.content" [style]="{'height': '100%', 'min-height' : '350px'}"
+            (onEditorCreated)="onEditorCreated($event)" placeholder="Insira seu conteúdo aqui" #editor>
+          </quill-editor>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="edit-article__title">Melhorias do ranqueamento - SEO</h3>
+  <div class="row">
+    <div class="col-12">
+      <tag-input class="tag-chips custom-tags" [(ngModel)]="article.meta.keywords" name="keywords" [modelAsStrings]="true" [addOnBlur]="true"
+        [placeholder]="'+ palavra-chave'" [secondaryPlaceholder]="'Palavra-chave'" [editable]="true" [theme]="'minimal'">
+      </tag-input>
+    </div>
+    <div class="col-12">
+      <textarea type="text" [(ngModel)]="article.seoMetaDescription" class="form-control" name="seoMetaDescription" placeholder="Meta description do seu artigo"
+        autocomplete="off" required #seoMetaDescription="ngModel"></textarea>
+    </div>
+  </div>
+
+  <div class="text-center m-t-10">
+    <button class="btn btn-success cursor-pointer" (click)="viewArticle()">
+      <i class="fa fa-eye m-r-5"></i>
+      Visualizar artigo final
+    </button>
   </div>
 </div>

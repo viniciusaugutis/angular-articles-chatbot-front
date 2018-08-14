@@ -75,3 +75,87 @@ ng-select.simple > div {
     }
   }
 }
+
+.tag-chips {
+  .ng2-tag-input {
+    line-height: 30px;
+    border-radius: 2px;
+    border: 1px solid #ced4da;
+    border-bottom: 1px solid #ced4da !important;
+    margin-bottom: 5px;
+    padding: 6px !important;
+    tag {
+      color: #fff !important;
+      background: linear-gradient(45deg, #00bcd4, #08e3ff) !important;
+      border-radius: 2px !important;
+      &.tag--editing {
+        color: #333 !important;
+        background: #fff !important;
+      }
+    }
+    &.bootstrap {
+      @extend tag;
+    }
+    &.minimal {
+      tag {
+        border-radius: 15px !important;
+      }
+    }
+    &.dark tag {
+      background: linear-gradient(45deg, #150909, #bbb8b8) !important;
+    }
+    &.danger tag {
+      background: linear-gradient(45deg, #FF5370, #ff869a) !important;
+    }
+    &.success tag {
+      background: linear-gradient(45deg, #2ed8b6, #59e0c5) !important;
+    }
+    &.warning tag {
+      background: linear-gradient(45deg, #FFB64D, #ffcb80) !important;
+    }
+    &.minimal-dark tag {
+      border-radius: 15px !important;
+      background: linear-gradient(45deg, #150909, #bbb8b8) !important;
+    }
+    &.minimal-danger tag {
+      border-radius: 15px !important;
+      background: linear-gradient(45deg, #FF5370, #ff869a) !important;
+    }
+    &.minimal-success tag {
+      border-radius: 15px !important;
+      background: linear-gradient(45deg, #2ed8b6, #59e0c5) !important;
+    }
+    &.minimal-warning tag {
+      border-radius: 15px !important;
+      background: linear-gradient(45deg, #FFB64D, #ffcb80) !important;
+    }
+  }
+  .tag__text {
+    line-height: 2;
+    font-size: 11px;
+    font-weight: 400;
+  }
+  delete-icon svg {
+    height: 12px !important;
+    line-height: 1;
+    vertical-align: top !important;
+    margin-top: 5px;
+    path {
+      fill: #fff !important;
+    }
+  }
+  .ng2-tags-container tag {
+    padding: 3px 6px !important;
+    height: 27px !important;
+  }
+  delete-icon:hover {
+    transform: none !important;
+  }
+  .ng2-tag-input__text-input {
+    height: auto !important;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}

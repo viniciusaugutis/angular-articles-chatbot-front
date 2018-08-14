@@ -18,7 +18,6 @@ export class ChatFeedbackComponent implements OnInit, AfterViewChecked {
   public chatbotScriptConversation: ChatConversationModel[];
   public indexScript: number;
   public questionFeedbackFromUser: string;
-  public showEditArticle: boolean;
 
   @ViewChild('scrollChat') private myScrollChat: ElementRef;
 
@@ -105,7 +104,7 @@ export class ChatFeedbackComponent implements OnInit, AfterViewChecked {
           if (this.chatbotScriptConversation[this.indexScript - 1].model === 'go-article') {
             this.loadingActionArticle = true;
             setTimeout(() => {
-              this.showEditArticle = true;
+              this.router.navigate(['/editor-artigo']);
             }, 3000);
           }
         }

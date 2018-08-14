@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { NgbModule, NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { QuillModule } from 'ngx-quill';
+import { TagInputModule } from 'ngx-chips';
 
 import { SelectModule } from 'ng-select';
-import { HttpClientModule } from '../../../node_modules/@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from '../../../node_modules/@angular/common/http';
     AngularFontAwesomeModule,
     SelectModule,
     HttpClientModule,
-    QuillModule
+    QuillModule,
+    TagInputModule
   ],
   declarations: [],
   exports: [
@@ -24,7 +26,8 @@ import { HttpClientModule } from '../../../node_modules/@angular/common/http';
     NgbAccordion,
     SelectModule,
     HttpClientModule,
-    QuillModule
+    QuillModule,
+    TagInputModule
   ]
 })
 export class SharedModule { }

@@ -49,8 +49,8 @@ export class ChatQuestionsComponent implements OnInit {
 
   public nextQuestion(answeredQuestion: boolean) {
     if (answeredQuestion && this.responseUserText) {
-      this.contentToEditor = this.contentToEditor.concat('<h2>' + this.questions[this.indexQuestion].name +
-        '</h2>' + '<p>' + this.responseUserText + '</p><br/>');
+      this.contentToEditor = this.contentToEditor.concat('<h1>' + this.questions[this.indexQuestion].name +
+        '</h1>' + '<p>' + this.responseUserText + '</p><br/>');
       this.contQuestionAnswered++;
     }
     this.loading = true;

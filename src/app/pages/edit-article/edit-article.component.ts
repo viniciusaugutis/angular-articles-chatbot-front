@@ -1,3 +1,4 @@
+import { Article } from './../../model/model';
 import { ArticleUtilsService } from './../../shared/article-utils.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,10 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditArticleComponent implements OnInit {
 
-  public content: string;
   public editor_modules;
   public editorInstance: any;
   public cursorInEditor: any;
+  public articleUtils: Article = new Article();
+  public article: Article = new Article();
 
   constructor(public articleUtilsService: ArticleUtilsService) { }
 
@@ -33,9 +35,14 @@ export class EditArticleComponent implements OnInit {
 
     this.articleUtilsService.currentArticleUtils.subscribe(currentArticleUtils => {
       if (currentArticleUtils) {
-       console.log(JSON.parse(currentArticleUtils));
+       this.articleUtils = JSON.parse(currentArticleUtils);
+        setTimeout(() => {
+          this.article.content = this.articleUtils.content;
+        }, 1000);
       }
     });
+
+    this.article.meta = this.article.meta || {};
   }
 
   public onEditorCreated(editorObj) {
