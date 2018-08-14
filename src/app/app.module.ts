@@ -1,4 +1,4 @@
-import { QuestionCategoryService } from './api/question-category.service';
+import { ArticleCategoryService } from './api/article-category.service';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -30,7 +30,7 @@ import { EditArticleComponent } from './pages/edit-article/edit-article.componen
     SharedModule,
     CoreModule
   ],
-  providers: [QuestionCategoryService],
+  providers: [ArticleCategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

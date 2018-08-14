@@ -2,11 +2,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { QuestionCategory } from './../model/model';
-import { environment } from './../../environments/environment';
+import { environment } from '../../environments/environment';
 
 export class QuestionFilter {
-  questionCategoryId: string;
+  articleCategoryId: string;
 }
 
 @Injectable()
@@ -21,8 +20,8 @@ export class QuestionService {
 
     let params = new HttpParams();
 
-    if (questionFilter.questionCategoryId) {
-      params = params.append('questionCategoryId', questionFilter.questionCategoryId);
+    if (questionFilter.articleCategoryId) {
+      params = params.append('articleCategoryId', questionFilter.articleCategoryId);
     }
 
     return this.http.get(`${this.url}`, {

@@ -1,7 +1,9 @@
-import { Question } from './../../model/model';
-import { QuestionService } from './../../api/question.service';
+import { Article } from './../../model/model';
+import { ArticleUtilsService } from './../../shared/article-utils.service';
+import { Question } from '../../model/model';
+import { QuestionService } from '../../api/question.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat-questions',
@@ -19,10 +21,12 @@ export class ChatQuestionsComponent implements OnInit {
   public loading;
   public contentToEditor: string;
   public responseUserText: string;
+  public articleUtils: Article = new Article();
 
   constructor(public questionService: QuestionService,
     public route: ActivatedRoute,
-    public router: Router) {
+    public router: Router,
+    public articleUtilsService: ArticleUtilsService) {
   }
 
   ngOnInit() {
@@ -37,7 +41,7 @@ export class ChatQuestionsComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
-        this.questionService.findAll({ questionCategoryId: params['categoryArticle'] }).subscribe(data => {
+        this.questionService.findAll({ articleCategoryId: params['categoryArticle'] }).subscribe(data => {
           this.questions = data.content;
         });
       });
@@ -58,7 +62,8 @@ export class ChatQuestionsComponent implements OnInit {
   }
 
   public finishArticle() {
-    console.log(this.contentToEditor);
+    this.articleUtils.content = this.contentToEditor;
+    this.articleUtilsService.updateArticleUtils(this.articleUtils);
     this.router.navigate(['/chat-feedback']);
   }
 

@@ -1,10 +1,12 @@
-import { QuestionService } from './../api/question.service';
-import { QuestionCategoryService } from './../api/question-category.service';
-import { SharedModule } from './../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '../../../node_modules/@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+
+import { ArticleUtilsService } from './../shared/article-utils.service';
+import { QuestionService } from '../api/question.service';
+import { ArticleCategoryService } from '../api/article-category.service';
 
 @NgModule({
   imports: [
@@ -15,8 +17,9 @@ import { FormsModule } from '../../../node_modules/@angular/forms';
   ],
   declarations: [],
   providers: [
-    QuestionCategoryService,
-    QuestionService
+    ArticleCategoryService,
+    QuestionService,
+    ArticleUtilsService
   ]
 })
 export class CoreModule { }

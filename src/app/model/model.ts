@@ -11,7 +11,7 @@ export class UserApp {
   email: string;
 }
 
-export class QuestionCategory {
+export class ArticleCategory {
   id: string;
   name: string;
 }
@@ -19,11 +19,23 @@ export class QuestionCategory {
 export class Question {
   id: string;
   name: string;
-  questionCategoryId: string;
+  articleCategoryId: string;
   questionKeywords: Array<QuestionKeyword>;
+  meta: any;
 }
 
 export class QuestionKeyword {
   id: string;
   name: string;
+}
+
+export class Article {
+  title: string;
+  content: string;
+  created: Date;
+  modified: Date;
+  meta: any;
+  seoUrl: string;
+  seoMetaDescription: string;
+  articleCategoryId: string;
 }

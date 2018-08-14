@@ -1,3 +1,4 @@
+import { ArticleUtilsService } from './../../shared/article-utils.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,7 +13,7 @@ export class EditArticleComponent implements OnInit {
   public editorInstance: any;
   public cursorInEditor: any;
 
-  constructor() { }
+  constructor(public articleUtilsService: ArticleUtilsService) { }
 
   ngOnInit() {
     this.editor_modules = {
@@ -29,6 +30,12 @@ export class EditArticleComponent implements OnInit {
         ]
       }
     };
+
+    this.articleUtilsService.currentArticleUtils.subscribe(currentArticleUtils => {
+      if (currentArticleUtils) {
+       console.log(JSON.parse(currentArticleUtils));
+      }
+    });
   }
 
   public onEditorCreated(editorObj) {

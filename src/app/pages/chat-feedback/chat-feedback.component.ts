@@ -1,8 +1,7 @@
-import { ChatbotConversationScript, ChatConversationModel } from './../../shared/chatbot-conversation';
+import { ChatbotConversationScript, ChatConversationModel } from '../../shared/chatbot-conversation';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
-import { Message, UserApp } from '../../model/model';
-import { QuestionCategoryService } from './../../api/question-category.service';
-import { Router } from '../../../../node_modules/@angular/router';
+import { Message } from '../../model/model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-chat-feedback',
   templateUrl: './chat-feedback.component.html',

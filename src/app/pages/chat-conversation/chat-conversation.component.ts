@@ -1,7 +1,7 @@
-import { ChatbotConversationScript, ChatConversationModel } from './../../shared/chatbot-conversation';
+import { ChatbotConversationScript, ChatConversationModel } from '../../shared/chatbot-conversation';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 import { Message, UserApp } from '../../model/model';
-import { QuestionCategoryService } from './../../api/question-category.service';
+import { ArticleCategoryService } from '../../api/article-category.service';
 
 @Component({
   selector: 'app-chat-conversation',
@@ -25,7 +25,7 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollChat') private myScrollChat: ElementRef;
 
   constructor(public chatbotConversationScript: ChatbotConversationScript,
-              public questionCategoryService: QuestionCategoryService) { }
+              public articleCategoryService: ArticleCategoryService) { }
 
   ngOnInit() {
 
@@ -40,7 +40,7 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
       this.verifyScriptChatbot();
       this.scrollToBottom();
 
-      this.categoryArticleOptions = this.questionCategoryService.findAll().subscribe(data => {
+      this.categoryArticleOptions = this.articleCategoryService.findAll().subscribe(data => {
         this.categoryArticleOptions = data.map(
           category => ({ label: category.name, value: category.id.toString() })
         );

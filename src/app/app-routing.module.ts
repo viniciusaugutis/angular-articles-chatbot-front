@@ -11,7 +11,7 @@ import { ChatConversationComponent } from './pages/chat-conversation/chat-conver
 
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
-import { FormsModule } from '../../node_modules/@angular/forms';
+import { FormsModule } from '@angular/forms';
 registerLocaleData(ptBr);
 
 const routes: Routes = [
