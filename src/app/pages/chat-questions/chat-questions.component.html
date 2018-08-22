@@ -55,17 +55,21 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-12">
       <textarea rows="18" class="form-control note-editor note-editor-margin" [(ngModel)]="responseUserText" [disabled]="!enableQuestion"></textarea>
-      <div class="note-editor__count-words" *ngIf = "responseUserText">
+      <div class="note-editor__count-words" *ngIf="responseUserText">
         <p [ngClass]="responseUserText?.length >= 20 ? 'color-green' : 'color-red'">{{responseUserText?.length}} letras</p>
       </div>
+      <div class="text-center">
+        <span class="badge badge-secondary m-t-20" *ngIf="!loadingDescriptionTheme && contQuestionAnswered < 2">Vamos lá! Só falta responder mais {{2 - contQuestionAnswered}} pergunta(s) para gerar seu artigo!</span>
+        <span class="badge badge-success m-t-20" *ngIf="!loadingDescriptionTheme && contQuestionAnswered >= 2">Parabéns! Você pode continuar respondendo as perguntas ou clicar em concluir para gerar seu artigo!</span>
+      </div>
     </div>
-    <div class="col-md-3 b-l-gray text-center">
+    <!--<div class="col-md-3 b-l-gray text-center">
       <h6 class="text-subl">Dicas de palavras chaves para utilizar</h6>
-      <p *ngFor="let keyword of questions[indexQuestion]?.questionKeywords" class = "m-b-5">
+      <p *ngFor="let keyword of questions[indexQuestion]?.questionKeywords" class="m-b-5">
         <span [ngClass]="responseUserText && responseUserText?.toLowerCase().indexOf(keyword.name.toLowerCase()) != -1 ? 'color-green' : 'color-red'">{{keyword.name}}</span>
       </p>
-    </div>
+    </div>-->
   </div>
 </div>
