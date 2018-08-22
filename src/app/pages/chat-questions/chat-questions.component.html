@@ -1,5 +1,5 @@
 <div class="p-10">
-  <div *ngIf="!loading">
+  <div *ngIf="!loading && !loadingDescriptionTheme">
     <div class="media chat-messages">
       <a class="media-left p-relative" href="javascript:">
         <img class="img-radius img-chat m-t--10" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
@@ -20,6 +20,27 @@
       <button class="btn btn-success cursor-pointer" *ngIf="contQuestionAnswered >= 2" (click)="finishArticle()">
         <i class="fa fa-flag-checkered m-r-5"></i>
         Concluir
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!loading && loadingDescriptionTheme">
+    <div class="media chat-messages m-b-30">
+      <a class="media-left p-relative" href="javascript:">
+        <img class="img-radius img-chat m-t--10" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
+      </a>
+      <div class="media-body chat-menu-content m-t-10">
+        <p class="chat-cont">{{descriptionTheme}}</p>
+        <p class="chat-cont">Vamos prosseguir?</p>
+      </div>
+    </div>
+    <div class="text-center m-t--10 m-b-10">
+      <button class="btn btn-primary cursor-pointer" (click)="goQuestions()">
+        <i class="fa m-r-5 fa-check"></i>
+        Vamos lá!
+      </button>
+      <button class="btn btn-danger cursor-pointer" (click)="nextTopicQuestion()">
+        <i class="fa fa-times m-r-5"></i>
+        Outro tema
       </button>
     </div>
   </div>

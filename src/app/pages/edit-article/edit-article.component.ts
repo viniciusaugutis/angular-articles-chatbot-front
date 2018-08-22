@@ -1,3 +1,4 @@
+import { Keyword } from './../../model/model';
 import { Article } from '../../model/model';
 import { ArticleUtilsService } from '../../shared/article-utils.service';
 import { Component, OnInit } from '@angular/core';
@@ -38,6 +39,10 @@ export class EditArticleComponent implements OnInit {
        this.articleUtils = JSON.parse(currentArticleUtils);
         setTimeout(() => {
           this.article.content = this.articleUtils.content;
+          this.article.meta = this.article.meta || {};
+          this.article.meta.keywords = this.articleUtils.meta.keywords.map(keyword => {
+            return keyword.name;
+          });
         }, 1000);
       }
     });

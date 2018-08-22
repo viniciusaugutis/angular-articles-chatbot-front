@@ -105,7 +105,7 @@ export class ChatFeedbackComponent implements OnInit, AfterViewChecked {
             this.loadingActionArticle = true;
             setTimeout(() => {
               this.router.navigate(['/editor-artigo']);
-            }, 3000);
+            }, 5000);
           }
         }
 

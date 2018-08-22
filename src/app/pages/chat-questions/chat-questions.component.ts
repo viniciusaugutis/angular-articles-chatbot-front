@@ -1,3 +1,4 @@
+import { Topic } from './../../model/model';
 import { TopicService } from './../../api/topic.service';
 import { Article } from '../../model/model';
 import { ArticleUtilsService } from '../../shared/article-utils.service';
@@ -23,6 +24,9 @@ export class ChatQuestionsComponent implements OnInit {
   public contentToEditor: string;
   public responseUserText: string;
   public articleUtils: Article = new Article();
+  public loadingDescriptionTheme = true;
+  public descriptionTheme = '';
+  public topicsCategory: Array<Topic>;
 
   constructor(public questionService: QuestionService,
     public route: ActivatedRoute,
@@ -44,9 +48,12 @@ export class ChatQuestionsComponent implements OnInit {
       .queryParams
       .subscribe(params => {
         this.topicService.findAll({ articleCategoryId: params['categoryArticle'] }).subscribe(dataTopics => {
+          this.topicsCategory = dataTopics.content;
           const topicSelect = Math.round((Math.random() * (dataTopics.totalElements - 1) + 1)).toString();
-          this.questionService.findAll({ topicId: topicSelect}).subscribe(dataQuestions => {
+          this.questionService.findAll({ topicId: topicSelect }).subscribe(dataQuestions => {
             this.questions = dataQuestions.content;
+            console.log(this.questions);
+            this.descriptionTheme = this.questions[0].topic.description;
           });
         });
       });
@@ -57,6 +64,7 @@ export class ChatQuestionsComponent implements OnInit {
       this.contentToEditor = this.contentToEditor.concat('<h1>' + this.questions[this.indexQuestion].name +
         '</h1>' + '<p>' + this.responseUserText + '</p><br/>');
       this.contQuestionAnswered++;
+      this.enableQuestion = false;
     }
     this.loading = true;
     this.indexQuestion++;
@@ -68,8 +76,34 @@ export class ChatQuestionsComponent implements OnInit {
 
   public finishArticle() {
     this.articleUtils.content = this.contentToEditor;
+    this.articleUtils.meta = this.articleUtils.meta || {};
+    this.articleUtils.meta.keywords = this.questions[0].topic.topicKeywords;
     this.articleUtilsService.updateArticleUtils(this.articleUtils);
     this.router.navigate(['/chat-feedback']);
+  }
+
+  public goQuestions() {
+    this.loadingDescriptionTheme = false;
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
+  }
+
+  public nextTopicQuestion() {
+    const topicSelect = Math.round((Math.random() * (this.topicsCategory.length - 1) + 1)).toString();
+    this.questionService.findAll({ topicId: topicSelect }).subscribe(dataQuestions => {
+      this.questions = dataQuestions.content;
+      if (this.questions[0].topic.description === this.descriptionTheme) {
+        this.nextTopicQuestion();
+      } else {
+        this.descriptionTheme = this.questions[0].topic.description;
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+        }, 2000);
+      }
+    });
   }
 
 }
