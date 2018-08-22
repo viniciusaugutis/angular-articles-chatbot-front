@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
-import { ArticleUtilsService } from './../shared/article-utils.service';
+import { ArticleUtilsService } from '../shared/article-utils.service';
 import { QuestionService } from '../api/question.service';
 import { ArticleCategoryService } from '../api/article-category.service';
+import { TopicService } from '../api/topic.service';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ArticleCategoryService } from '../api/article-category.service';
   providers: [
     ArticleCategoryService,
     QuestionService,
-    ArticleUtilsService
+    ArticleUtilsService,
+    TopicService
   ]
 })
 export class CoreModule { }

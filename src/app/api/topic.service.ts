@@ -4,24 +4,24 @@ import { Observable } from 'rxjs/Observable';
 
 import { environment } from '../../environments/environment';
 
-export class QuestionFilter {
-  topicId: string;
+export class TopicFilter {
+  articleCategoryId: string;
 }
 
 @Injectable()
-export class QuestionService {
+export class TopicService {
 
-  url = `${environment.apiUrl}` + '/questions';
+  url = `${environment.apiUrl}` + '/topics';
 
   constructor(private http: HttpClient) {
   }
 
-  findAll(questionFilter: QuestionFilter): Observable<any> {
+  findAll(topicFilter: TopicFilter): Observable<any> {
 
     let params = new HttpParams();
 
-    if (questionFilter.topicId) {
-      params = params.append('topicId', questionFilter.topicId);
+    if (topicFilter.articleCategoryId) {
+      params = params.append('articleCategoryId', topicFilter.articleCategoryId);
     }
 
     return this.http.get(`${this.url}`, {

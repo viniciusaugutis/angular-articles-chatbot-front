@@ -19,12 +19,20 @@ export class ArticleCategory {
 export class Question {
   id: string;
   name: string;
-  articleCategoryId: string;
-  questionKeywords: Array<QuestionKeyword>;
+  topic = new Topic();
   meta: any;
 }
 
-export class QuestionKeyword {
+export class Topic {
+  id: string;
+  name: string;
+  description: string;
+  topicKeywords: Array<Keyword>;
+  articleCategory = new ArticleCategory();
+  meta: any;
+}
+
+export class Keyword {
   id: string;
   name: string;
 }

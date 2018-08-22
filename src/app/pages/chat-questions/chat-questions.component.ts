@@ -1,5 +1,6 @@
-import { Article } from './../../model/model';
-import { ArticleUtilsService } from './../../shared/article-utils.service';
+import { TopicService } from './../../api/topic.service';
+import { Article } from '../../model/model';
+import { ArticleUtilsService } from '../../shared/article-utils.service';
 import { Question } from '../../model/model';
 import { QuestionService } from '../../api/question.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -26,7 +27,8 @@ export class ChatQuestionsComponent implements OnInit {
   constructor(public questionService: QuestionService,
     public route: ActivatedRoute,
     public router: Router,
-    public articleUtilsService: ArticleUtilsService) {
+    public articleUtilsService: ArticleUtilsService,
+    public topicService: TopicService) {
   }
 
   ngOnInit() {
@@ -41,8 +43,11 @@ export class ChatQuestionsComponent implements OnInit {
     this.route
       .queryParams
       .subscribe(params => {
-        this.questionService.findAll({ articleCategoryId: params['categoryArticle'] }).subscribe(data => {
-          this.questions = data.content;
+        this.topicService.findAll({ articleCategoryId: params['categoryArticle'] }).subscribe(dataTopics => {
+          const topicSelect = Math.round((Math.random() * (dataTopics.totalElements - 1) + 1)).toString();
+          this.questionService.findAll({ topicId: topicSelect}).subscribe(dataQuestions => {
+            this.questions = dataQuestions.content;
+          });
         });
       });
   }

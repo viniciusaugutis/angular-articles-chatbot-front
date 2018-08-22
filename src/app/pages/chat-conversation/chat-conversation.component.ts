@@ -32,7 +32,7 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
-      this.indexScript = 4;
+      this.indexScript = 0;
       this.chatbotScriptConversation = this.chatbotConversationScript.getScriptConversation();
       this.message = this.factoryMessage(this.chatbotScriptConversation[this.indexScript].text, true, this.chatbotScriptConversation[this.indexScript].typeMessage,
         this.chatbotScriptConversation[this.indexScript].model);

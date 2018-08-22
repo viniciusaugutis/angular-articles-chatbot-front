@@ -1,5 +1,5 @@
-import { Article } from './../../model/model';
-import { ArticleUtilsService } from './../../shared/article-utils.service';
+import { Article } from '../../model/model';
+import { ArticleUtilsService } from '../../shared/article-utils.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

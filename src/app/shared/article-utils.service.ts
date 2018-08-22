@@ -1,4 +1,4 @@
-import { Article } from './../model/model';
+import { Article } from '../model/model';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
