@@ -38,6 +38,7 @@ export class Keyword {
 }
 
 export class Article {
+  id: string;
   title: string;
   content: string;
   created: Date;
@@ -45,5 +46,5 @@ export class Article {
   meta: any;
   seoUrl: string;
   seoMetaDescription: string;
-  articleCategoryId: string;
+  articleCategory = new ArticleCategory();
 }

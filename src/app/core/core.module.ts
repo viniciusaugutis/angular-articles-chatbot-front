@@ -8,6 +8,7 @@ import { ArticleUtilsService } from '../shared/article-utils.service';
 import { QuestionService } from '../api/question.service';
 import { ArticleCategoryService } from '../api/article-category.service';
 import { TopicService } from '../api/topic.service';
+import { ArticleService } from './../api/article.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { TopicService } from '../api/topic.service';
     ArticleCategoryService,
     QuestionService,
     ArticleUtilsService,
-    TopicService
+    TopicService,
+    ArticleService
   ]
 })
 export class CoreModule { }

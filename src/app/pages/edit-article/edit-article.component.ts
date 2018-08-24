@@ -1,7 +1,9 @@
+import { ArticleService } from './../../api/article.service';
 import { Keyword } from './../../model/model';
 import { Article } from '../../model/model';
 import { ArticleUtilsService } from '../../shared/article-utils.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-article',
@@ -16,7 +18,9 @@ export class EditArticleComponent implements OnInit {
   public articleUtils: Article = new Article();
   public article: Article = new Article();
 
-  constructor(public articleUtilsService: ArticleUtilsService) { }
+  constructor(public articleUtilsService: ArticleUtilsService,
+    public articleService: ArticleService,
+    public router: Router) { }
 
   ngOnInit() {
     this.editor_modules = {
@@ -36,7 +40,7 @@ export class EditArticleComponent implements OnInit {
 
     this.articleUtilsService.currentArticleUtils.subscribe(currentArticleUtils => {
       if (currentArticleUtils) {
-       this.articleUtils = JSON.parse(currentArticleUtils);
+        this.articleUtils = JSON.parse(currentArticleUtils);
         setTimeout(() => {
           this.article.content = this.articleUtils.content;
           this.article.meta = this.article.meta || {};
@@ -56,5 +60,12 @@ export class EditArticleComponent implements OnInit {
     this.cursorInEditor = this.editorInstance.getSelection();
   }
 
+  public viewArticle() {
+    this.article.articleCategory.id = this.articleUtils.articleCategory.id || '1';
+    this.articleService.create(this.article).subscribe(response => {
+      this.articleUtilsService.updateArticleUtils(this.article);
+      this.router.navigate(['/artigo', response.id]);
+    });
+  }
 }
 

@@ -1,0 +1,51 @@
+<div class="p-10">
+  <div class="row view-article">
+    <div class="col-12 va__box">
+
+      <div class="va__category">
+        {{article?.articleCategory?.name}}
+      </div>
+      <div class="va__title">
+        {{article?.title}}
+      </div>
+
+      <div class="vai__item">
+        <p>
+          <i class="fa fa-calendar m-r-5"></i>
+          <span>{{nowDate | date:"dd \'de\' MMMM yyyy"}}</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="va__divider">
+      <hr>
+    </div>
+
+    <div class="col-xs-12 va__content">
+      <div class="vac__intent">
+        <div [innerHTML]="article.content | safeHtml"></div>
+      </div>
+    </div>
+
+    <div class="va__divider">
+      <hr>
+    </div>
+
+    <div class="col-sm-6 va_tags">
+      <p *ngIf="article?.meta?.keywords?.length">
+        <span> Tags:
+          <span class="color-orange-template tags__a-link">
+            {{article?.meta?.keywords?.join(', ')}}
+          </span>
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <div class="text-center m-t-10" (click) = "downloadArticle()" [ngClass]="downloadingArticle ? 'display-none' : ''">
+    <a class="btn btn-success cursor-pointer" onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)"
+      href="#" download="artigo.html">
+      <i class="fa fa-eye m-r-5"></i>
+      Salvar artigo
+    </a>
+  </div>

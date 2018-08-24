@@ -12,6 +12,7 @@ import { ChatConversationComponent } from './pages/chat-conversation/chat-conver
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { SeeArticleComponent } from './pages/see-article/see-article.component';
 registerLocaleData(ptBr);
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'chat-perguntas', component: ChatQuestionsComponent},
   { path: 'chat-feedback', component: ChatFeedbackComponent },
   { path: 'editor-artigo', component: EditArticleComponent },
+  { path: 'artigo/:id', component: SeeArticleComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: HomeComponent }
 ];

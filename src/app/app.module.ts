@@ -1,3 +1,4 @@
+import { PipeModule } from './pipe/pipe.module';
 import { ArticleCategoryService } from './api/article-category.service';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +14,7 @@ import { ChatQuestionsComponent } from './pages/chat-questions/chat-questions.co
 import { CoreModule } from './core/core.module';
 import { ChatFeedbackComponent } from './pages/chat-feedback/chat-feedback.component';
 import { EditArticleComponent } from './pages/edit-article/edit-article.component';
+import { SeeArticleComponent } from './pages/see-article/see-article.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +23,16 @@ import { EditArticleComponent } from './pages/edit-article/edit-article.componen
     ChatConversationComponent,
     ChatQuestionsComponent,
     ChatFeedbackComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    SeeArticleComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    PipeModule
   ],
   providers: [ArticleCategoryService],
   bootstrap: [AppComponent]

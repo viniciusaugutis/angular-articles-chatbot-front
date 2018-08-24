@@ -75,6 +75,7 @@ export class ChatQuestionsComponent implements OnInit {
   }
 
   public finishArticle() {
+    this.articleUtils.articleCategory = this.questions[0].topic.articleCategory;
     this.articleUtils.content = this.contentToEditor;
     this.articleUtils.meta = this.articleUtils.meta || {};
     this.articleUtils.meta.keywords = this.questions[0].topic.topicKeywords;
