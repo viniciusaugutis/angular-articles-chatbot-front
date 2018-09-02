@@ -9,6 +9,7 @@ import { QuestionService } from '../api/question.service';
 import { ArticleCategoryService } from '../api/article-category.service';
 import { TopicService } from '../api/topic.service';
 import { ArticleService } from './../api/article.service';
+import { SeoService } from './seo/seo.service';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { ArticleService } from './../api/article.service';
     QuestionService,
     ArticleUtilsService,
     TopicService,
-    ArticleService
+    ArticleService,
+    SeoService
   ]
 })
 export class CoreModule { }

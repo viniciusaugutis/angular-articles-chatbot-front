@@ -43,7 +43,7 @@
   </div>
 
   <div class="text-center m-t-10" (click) = "downloadArticle()" [ngClass]="downloadingArticle ? 'display-none' : ''">
-    <a class="btn btn-success cursor-pointer" onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)"
+    <a class="btn btn-success cursor-pointer" onclick="this.href='data:text/html;charset=UTF-8;keywords=123,'+encodeURIComponent(document.documentElement.outerHTML)"
       href="#" download="artigo.html">
       <i class="fa fa-eye m-r-5"></i>
       Salvar artigo

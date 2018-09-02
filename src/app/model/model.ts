@@ -48,3 +48,9 @@ export class Article {
   seoMetaDescription: string;
   articleCategory = new ArticleCategory();
 }
+
+export class PageSeoSetup {
+  title: string;
+  description: string;
+  keywords: Array<string>;
+}
