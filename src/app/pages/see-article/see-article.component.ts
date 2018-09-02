@@ -54,10 +54,9 @@ export class SeeArticleComponent implements OnInit {
   }
 
   public downloadArticle() {
-    console.log('chamou');
     this.downloadingArticle = true;
     setTimeout(() => {
       this.downloadingArticle = false;
-    }, 2000);
+    }, 4000);
   }
 }

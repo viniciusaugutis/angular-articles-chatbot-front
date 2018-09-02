@@ -31,7 +31,6 @@ export class SeoService {
           name: 'description',
           content: metaTag.description
         });
-        console.log('chegou aqui');
         return;
       } else {
         return;
