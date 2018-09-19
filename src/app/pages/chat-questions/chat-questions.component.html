@@ -1,4 +1,4 @@
-<div class="p-10">
+<div class="p-10" *ngIf="!openChatFeedback">
   <div *ngIf="!loading && !loadingDescriptionTheme">
     <div class="media chat-messages">
       <a class="media-left p-relative" href="javascript:">
@@ -61,8 +61,10 @@
         <p [ngClass]="responseUserText?.length >= 20 ? 'color-green' : 'color-red'">{{responseUserText?.length}} letras</p>
       </div>
       <div class="text-center">
-        <span class="badge badge-secondary m-t-20" *ngIf="!loadingDescriptionTheme && contQuestionAnswered < 2">Vamos lá! Só falta responder mais {{2 - contQuestionAnswered}} pergunta(s) para gerar seu artigo!</span>
-        <span class="badge badge-success m-t-20" *ngIf="!loadingDescriptionTheme && contQuestionAnswered >= 2">Parabéns! Você pode continuar respondendo as perguntas ou clicar em concluir para gerar seu artigo!</span>
+        <span class="badge badge-secondary m-t-20" *ngIf="!loadingDescriptionTheme && contQuestionAnswered < 2">Vamos lá!
+          Só falta responder mais {{2 - contQuestionAnswered}} pergunta(s) para gerar seu artigo!</span>
+        <span class="badge badge-success m-t-20" *ngIf="!loadingDescriptionTheme && contQuestionAnswered >= 2">Parabéns!
+          Você pode continuar respondendo as perguntas ou clicar em concluir para gerar seu artigo!</span>
       </div>
     </div>
     <!--<div class="col-md-3 b-l-gray text-center">
@@ -72,4 +74,8 @@
       </p>
     </div>-->
   </div>
+</div>
+
+<div *ngIf="openChatFeedback">
+  <app-chat-feedback></app-chat-feedback>
 </div>

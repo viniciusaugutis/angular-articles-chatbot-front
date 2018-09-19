@@ -33,7 +33,7 @@
 
     <div class="col-sm-6 va_tags">
       <p *ngIf="article?.meta?.keywords?.length">
-        <span> Tags:
+        <span class = "text-bold"> Tags:
           <span class="color-orange-template tags__a-link">
             {{article?.meta?.keywords?.join(', ')}}
           </span>
@@ -42,9 +42,9 @@
     </div>
   </div>
 
-  <div class="text-center m-t-10" [ngClass]="downloadingArticle ? 'display-none' : ''">
-    <a class="btn btn-success cursor-pointer" (click)="downloadArticle()" onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)"
-      href="#" download="artigo.html">
+  <div class="text-center m-t-10 display-none">
+    <a class="btn btn-success cursor-pointer" onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)"
+      href="#" download="artigo.html" #buttonDownload>
       <i class="fa fa-eye m-r-5"></i>
       Salvar artigo
     </a>

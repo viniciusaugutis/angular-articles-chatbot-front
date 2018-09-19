@@ -1,6 +1,6 @@
 import { Keyword } from './../../model/model';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 
 import { ArticleUtilsService } from './../../shared/article-utils.service';
 import { Article, PageSeoSetup } from '../../model/model';
@@ -11,13 +11,15 @@ import { SeoService } from '../../core/seo/seo.service';
 @Component({
   selector: 'app-see-article',
   templateUrl: './see-article.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./see-article.component.scss']
 })
 export class SeeArticleComponent implements OnInit {
 
+  @ViewChild('buttonDownload') buttonDownload: ElementRef;
+
   public article = new Article();
   public nowDate = new Date();
-  public downloadingArticle;
 
   public tags = new PageSeoSetup;
 
@@ -51,12 +53,9 @@ export class SeeArticleComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  public downloadArticle() {
-    this.downloadingArticle = true;
     setTimeout(() => {
-      this.downloadingArticle = false;
+      const el: HTMLElement = this.buttonDownload.nativeElement as HTMLElement;
+      el.click();
     }, 4000);
   }
 }

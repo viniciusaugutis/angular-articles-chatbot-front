@@ -27,6 +27,7 @@ export class ChatQuestionsComponent implements OnInit {
   public loadingDescriptionTheme = true;
   public descriptionTheme = '';
   public topicsCategory: Array<Topic>;
+  public openChatFeedback = false;
 
   constructor(public questionService: QuestionService,
     public route: ActivatedRoute,
@@ -80,7 +81,7 @@ export class ChatQuestionsComponent implements OnInit {
     this.articleUtils.meta = this.articleUtils.meta || {};
     this.articleUtils.meta.keywords = this.questions[0].topic.topicKeywords;
     this.articleUtilsService.updateArticleUtils(this.articleUtils);
-    this.router.navigate(['/chat-feedback']);
+    this.openChatFeedback = true;
   }
 
   public goQuestions() {

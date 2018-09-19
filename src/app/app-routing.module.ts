@@ -19,7 +19,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'chat', component: ChatConversationComponent },
   { path: 'chat-perguntas', component: ChatQuestionsComponent},
-  { path: 'chat-feedback', component: ChatFeedbackComponent },
   { path: 'editor-artigo', component: EditArticleComponent },
   { path: 'artigo/:id', component: SeeArticleComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

@@ -39,7 +39,7 @@ const CHAT_CONVERSATION = [
     typeMessage: 'select'
   },
   {
-    text: 'A categoria X é bem pesquisada na internet, cerca de Y pessoas buscam sobre isso todos os meses.',
+    text: 'A categoria X é bem pesquisada na internet, várias pessoas buscam sobre isso todos os meses.',
     model: 'category-result',
     nextNow: true,
     typeMessage: 'text'

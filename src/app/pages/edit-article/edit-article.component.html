@@ -16,15 +16,15 @@
     </div>
   </div>
 
-  <h3 class="edit-article__title">Melhorias do ranqueamento - SEO</h3>
+  <h3 class="edit-article__title">Melhorias do ranqueamento no Google (SEO)</h3>
   <div class="row">
     <div class="col-12">
       <tag-input class="tag-chips custom-tags" [(ngModel)]="article.meta.keywords" name="keywords" [modelAsStrings]="true" [addOnBlur]="true"
-        [placeholder]="'+ palavra-chave'" [secondaryPlaceholder]="'Palavra-chave'" [editable]="true" [theme]="'minimal'">
+        [placeholder]="'+ palavra-chave'" [secondaryPlaceholder]="'Palavras-chaves'" [editable]="true" [theme]="'minimal'">
       </tag-input>
     </div>
     <div class="col-12">
-      <textarea type="text" [(ngModel)]="article.seoMetaDescription" class="form-control" name="seoMetaDescription" placeholder="Meta description do seu artigo"
+      <textarea type="text" [(ngModel)]="article.seoMetaDescription" class="form-control" name="seoMetaDescription" placeholder="Escreva um resumo do que se trata esse artigo. Essa descrição irá aparecem em sites de busca, como o Google."
         autocomplete="off" required #seoMetaDescription="ngModel"></textarea>
     </div>
   </div>
