@@ -49,7 +49,7 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
 
   }
 
-  public sendMessage(text): void {
+  public sendMessage(text?): void {
     if (this.loading) {
       return;
     }

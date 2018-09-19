@@ -40,7 +40,7 @@ export class ChatFeedbackComponent implements OnInit, AfterViewChecked {
 
   }
 
-  public sendMessage(text): void {
+  public sendMessage(text?): void {
     if (this.loading) {
       return;
     }
