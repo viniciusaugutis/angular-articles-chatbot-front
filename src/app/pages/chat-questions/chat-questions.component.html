@@ -1,47 +1,60 @@
-<div class="p-10" *ngIf="!openChatFeedback">
+<div *ngIf="!openChatFeedback">
   <div *ngIf="!loading && !loadingDescriptionTheme">
-    <div class="media chat-messages">
-      <a class="media-left p-relative" href="javascript:">
-        <img class="img-radius img-chat m-t--10" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
-      </a>
-      <div class="media-body chat-menu-content m-t-10">
-        <p class="chat-cont">{{questions[indexQuestion]?.name}}</p>
+    <div class="row">
+      <div class="col-12">
+        <div class="media chat-messages">
+          <a class="media-left p-relative" href="javascript:">
+            <img class="img-radius img-chat m-t--10" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
+          </a>
+          <div class="media-body chat-menu-content m-t-10">
+            <p class="chat-cont">{{questions[indexQuestion]?.name}}</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="text-center m-t--10 m-b-10">
-      <button class="btn btn-primary cursor-pointer" (click)="enableQuestion ? nextQuestion(true) : (enableQuestion = true)" [disabled]="enableQuestion && responseUserText?.length < 20 ">
-        <i class="fa m-r-5" [ngClass]="enableQuestion ? 'fa-arrow-right' : 'fa-check'"></i>
-        {{enableQuestion ? 'Próxima' : 'Responder'}}
-      </button>
-      <button class="btn btn-danger cursor-pointer" (click)="nextQuestion(false)">
-        <i class="fa fa-times m-r-5"></i>
-        Pular
-      </button>
-      <button class="btn btn-success cursor-pointer" *ngIf="contQuestionAnswered >= 2" (click)="finishArticle()">
-        <i class="fa fa-flag-checkered m-r-5"></i>
-        Concluir
-      </button>
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center m-t-10 m-b-10">
+          <button class="btn btn-primary cursor-pointer" (click)="enableQuestion ? nextQuestion(true) : (enableQuestion = true)"
+            [disabled]="enableQuestion && responseUserText?.length < 20 ">
+            <i class="fa m-r-5" [ngClass]="enableQuestion ? 'fa-arrow-right' : 'fa-check'"></i>
+            {{enableQuestion ? 'Próxima' : 'Responder'}}
+          </button>
+          <button class="btn btn-danger cursor-pointer" (click)="nextQuestion(false)">
+            <i class="fa fa-times m-r-5"></i>
+            Pular
+          </button>
+          <button class="btn btn-success cursor-pointer" *ngIf="contQuestionAnswered >= 2" (click)="finishArticle()">
+            <i class="fa fa-flag-checkered m-r-5"></i>
+            Concluir
+          </button>
+        </div>
+      </div>
     </div>
   </div>
   <div *ngIf="!loading && loadingDescriptionTheme">
-    <div class="media chat-messages m-b-30">
-      <a class="media-left p-relative" href="javascript:">
-        <img class="img-radius img-chat m-t--10" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
-      </a>
-      <div class="media-body chat-menu-content m-t-10">
-        <p class="chat-cont">{{descriptionTheme}}</p>
-        <p class="chat-cont">Vamos prosseguir?</p>
+    <div class="row">
+      <div class="col-12">
+        <div class="media chat-messages m-b-30">
+          <a class="media-left p-relative" href="javascript:">
+            <img class="img-radius img-chat m-t--10" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
+          </a>
+          <div class="media-body chat-menu-content m-t-10">
+            <p class="chat-cont">{{descriptionTheme}}</p>
+            <p class="chat-cont">Vamos prosseguir?</p>
+          </div>
+        </div>
+        <div class="text-center m-t--10 m-b-10">
+          <button class="btn btn-primary cursor-pointer" (click)="goQuestions()">
+            <i class="fa m-r-5 fa-check"></i>
+            Vamos lá!
+          </button>
+          <button class="btn btn-danger cursor-pointer" (click)="nextTopicQuestion()">
+            <i class="fa fa-times m-r-5"></i>
+            Outro tema
+          </button>
+        </div>
       </div>
-    </div>
-    <div class="text-center m-t--10 m-b-10">
-      <button class="btn btn-primary cursor-pointer" (click)="goQuestions()">
-        <i class="fa m-r-5 fa-check"></i>
-        Vamos lá!
-      </button>
-      <button class="btn btn-danger cursor-pointer" (click)="nextTopicQuestion()">
-        <i class="fa fa-times m-r-5"></i>
-        Outro tema
-      </button>
     </div>
   </div>
   <div class="media chat-messages" *ngIf="loading">
@@ -58,10 +71,12 @@
     <div class="col-12">
       <textarea rows="18" class="form-control note-editor note-editor-margin" [(ngModel)]="responseUserText" [disabled]="!enableQuestion"></textarea>
       <div class="note-editor__count-words" *ngIf="responseUserText">
-        <p [ngClass]="responseUserText?.length >= 20 ? 'color-green' : 'color-red'">{{responseUserText?.length}} letras</p>
+        <p [ngClass]="responseUserText?.length >= 20 ? 'color-green' : 'color-red'">{{responseUserText?.length}}
+          letras</p>
       </div>
       <div class="text-center">
-        <span class="badge badge-secondary m-t-20" *ngIf="!loadingDescriptionTheme && contQuestionAnswered < 2">Vamos lá!
+        <span class="badge badge-secondary m-t-20" *ngIf="!loadingDescriptionTheme && contQuestionAnswered < 2">Vamos
+          lá!
           Só falta responder mais {{2 - contQuestionAnswered}} pergunta(s) para gerar seu artigo!</span>
         <span class="badge badge-success m-t-20" *ngIf="!loadingDescriptionTheme && contQuestionAnswered >= 2">Parabéns!
           Você pode continuar respondendo as perguntas ou clicar em concluir para gerar seu artigo!</span>

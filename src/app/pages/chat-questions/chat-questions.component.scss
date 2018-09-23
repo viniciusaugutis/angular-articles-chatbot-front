@@ -7,11 +7,14 @@
   height: auto;
 }
 
+.badge {
+  white-space: normal;
+}
+
 .note-editor {
   background-size: 100% 20px;
   background-color: #fff;
   line-height: 20px;
-  margin-top: 5px;
   padding: 0;
   padding-bottom: 1px;
   border: none;

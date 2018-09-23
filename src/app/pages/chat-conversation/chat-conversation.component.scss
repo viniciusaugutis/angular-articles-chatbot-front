@@ -170,5 +170,15 @@
     position: absolute;
     height: 100%;
     width: 100%;
+
+    @media screen and (max-width: 767px) {
+       object-fit: cover;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  ng-select {
+    max-width: 200px;
   }
 }

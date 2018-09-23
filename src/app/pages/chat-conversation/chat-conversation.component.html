@@ -20,7 +20,7 @@
           </div>
           <ng-select [options]="categoryArticleOptions" class="simple p-10" [(ngModel)]="categoryArticleSelected" notFoundMsg="Categoria não encontrada"
             (selected)="messageChatbotAfterSelect();" [placeholder]="'Selecione um tema para o seu artigo'" autocomplete="off"
-            *ngIf="message.typeMessage == 'select'"></ng-select>
+            *ngIf="message.typeMessage == 'select'" [disabled] = "categoryArticleSelected"></ng-select>
           <p class="chat-time pull-right">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
         </div>
       </div>
@@ -51,7 +51,8 @@
   </div>
   <div class="chat-reply-box">
     <div class="right-icon-control">
-      <input type="text" class="form-control search-text" placeholder="Escreva aqui" (keydown.enter)="sendMessage()" [(ngModel)]="textUser" autofocus>
+      <input type="text" class="form-control search-text" placeholder="Escreva aqui" (keydown.enter)="sendMessage()" [(ngModel)]="textUser" autofocus
+      [disabled] = "chatbotScriptConversation && indexScript && chatbotScriptConversation[indexScript] && chatbotScriptConversation[indexScript].model && chatbotScriptConversation[indexScript].model === 'category-result'">
       <div class="form-icon" (click)="sendMessage()">
         <i class="fa fa-paper-plane"></i>
       </div>

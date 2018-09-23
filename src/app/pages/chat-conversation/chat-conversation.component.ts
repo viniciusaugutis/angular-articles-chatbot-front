@@ -25,7 +25,7 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
   @ViewChild('scrollChat') private myScrollChat: ElementRef;
 
   constructor(public chatbotConversationScript: ChatbotConversationScript,
-              public articleCategoryService: ArticleCategoryService) { }
+    public articleCategoryService: ArticleCategoryService) { }
 
   ngOnInit() {
 
@@ -58,8 +58,19 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
 
     if (this.chatbotScriptConversation[this.indexScript - 1] && this.chatbotScriptConversation[this.indexScript - 1].model) {
       if (this.chatbotScriptConversation[this.indexScript - 1].model === 'name') {
+        this.userApp.name = '';
         this.userApp.name = this.textUser;
       } else if (this.chatbotScriptConversation[this.indexScript - 1].model === 'email') {
+        if (this.textUser === '1') { // validar email aqui
+          this.loading = true;
+          setTimeout(() => {
+            this.message = this.factoryMessage('Desculpe, não entendi! Por favor, digite novamente seu e-mail', true);
+            this.conversation.push(this.message);
+            this.loading = false;
+            this.textUser = '';
+          }, 2000);
+          return;
+        }
         this.userApp.email = this.textUser;
       }
     }
@@ -69,18 +80,16 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     setTimeout(() => {
       const auxScript = this.chatbotScriptConversation[this.indexScript];
       if (auxScript) {
+        let auxText = '';
         switch (auxScript.model) {
           case 'email':
-            auxScript.text = `${this.userApp.name}, ${auxScript.text}`;
+            auxText = `${this.userApp.name}, ${auxScript.text}`;
             break;
         }
-        this.message = this.factoryMessage(auxScript.text, true, auxScript.typeMessage, auxScript.model);
+        this.message = this.factoryMessage((auxText ? auxText : auxScript.text), true, auxScript.typeMessage, auxScript.model);
         this.conversation.push(this.message);
         this.loading = false;
         this.verifyScriptChatbot();
-      } else {
-        console.log(this.userApp);
-        console.log('FIMMM');
       }
     }, 2000);
   }
@@ -131,6 +140,8 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
     switch (this.chatbotScriptConversation[this.indexScript].model) {
       case 'category-result':
         this.categoryArticleOptions.forEach(element => {
+          console.log(this.categoryArticleSelected);
+          console.log(element.value);
           if (element.value === this.categoryArticleSelected) {
             this.chatbotScriptConversation[this.indexScript].text = this.chatbotScriptConversation[this.indexScript].text.replace('X', element.label);
           }
