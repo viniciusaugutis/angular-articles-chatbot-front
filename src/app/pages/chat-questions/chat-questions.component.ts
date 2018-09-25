@@ -50,10 +50,9 @@ export class ChatQuestionsComponent implements OnInit {
       .subscribe(params => {
         this.topicService.findAll({ articleCategoryId: params['categoryArticle'] }).subscribe(dataTopics => {
           this.topicsCategory = dataTopics.content;
-          const topicSelect = Math.round((Math.random() * (dataTopics.totalElements - 1) + 1)).toString();
-          this.questionService.findAll({ topicId: topicSelect }).subscribe(dataQuestions => {
+          const topicSelect = Math.round((Math.random() * (dataTopics.totalElements - 1))).toString();
+          this.questionService.findAll({ topicId: this.topicsCategory[topicSelect].id}).subscribe(dataQuestions => {
             this.questions = dataQuestions.content;
-            console.log(this.questions);
             this.descriptionTheme = this.questions[0].topic.description;
           });
         });
@@ -93,8 +92,8 @@ export class ChatQuestionsComponent implements OnInit {
   }
 
   public nextTopicQuestion() {
-    const topicSelect = Math.round((Math.random() * (this.topicsCategory.length - 1) + 1)).toString();
-    this.questionService.findAll({ topicId: topicSelect }).subscribe(dataQuestions => {
+    const topicSelect = Math.round((Math.random() * (this.topicsCategory.length - 1))).toString();
+    this.questionService.findAll({ topicId: this.topicsCategory[topicSelect].id}).subscribe(dataQuestions => {
       this.questions = dataQuestions.content;
       if (this.questions[0].topic.description === this.descriptionTheme) {
         this.nextTopicQuestion();

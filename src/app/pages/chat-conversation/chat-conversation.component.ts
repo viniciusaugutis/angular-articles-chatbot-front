@@ -61,13 +61,14 @@ export class ChatConversationComponent implements OnInit, AfterViewChecked {
         this.userApp.name = '';
         this.userApp.name = this.textUser;
       } else if (this.chatbotScriptConversation[this.indexScript - 1].model === 'email') {
-        if (this.textUser === '1') { // validar email aqui
+        const EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+        if (this.textUser !== '' && (this.textUser.length <= 5 || !EMAIL_REGEXP.test(this.textUser))) {
           this.loading = true;
+          this.textUser = '';
           setTimeout(() => {
             this.message = this.factoryMessage('Desculpe, não entendi! Por favor, digite novamente seu e-mail', true);
             this.conversation.push(this.message);
             this.loading = false;
-            this.textUser = '';
           }, 2000);
           return;
         }

@@ -21,13 +21,13 @@
           <ng-select [options]="categoryArticleOptions" class="simple p-10" [(ngModel)]="categoryArticleSelected" notFoundMsg="Categoria não encontrada"
             (selected)="messageChatbotAfterSelect();" [placeholder]="'Selecione um tema para o seu artigo'" autocomplete="off"
             *ngIf="message.typeMessage == 'select'" [disabled] = "categoryArticleSelected"></ng-select>
-          <p class="chat-time pull-right">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
+          <p class="chat-time pull-right">{{message.sendAt | date:"MMM d, y, h:mm a"}}</p>
         </div>
       </div>
       <div class="media chat-messages" *ngIf="!message.isChatbot">
         <div class="media-body chat-menu-reply">
           <p class="chat-cont">{{message.text}}</p>
-          <p class="chat-time pull-right">{{message.sendAt | date:"MMM d, y, h:mm:ss a"}}</p>
+          <p class="chat-time pull-right">{{message.sendAt | date:"MMM d, y, h:mm a"}}</p>
         </div>
         <div class="media-right photo-table p-relative">
           <a href="javascript:">

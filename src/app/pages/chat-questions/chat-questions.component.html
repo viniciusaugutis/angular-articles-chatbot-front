@@ -7,7 +7,7 @@
             <img class="img-radius img-chat m-t--10" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
           </a>
           <div class="media-body chat-menu-content m-t-10">
-            <p class="chat-cont">{{questions[indexQuestion]?.name}}</p>
+            <p class="chat-cont">{{questions[indexQuestion]?.name || 'As perguntas acabaram. Clique em concluir'}}</p>
           </div>
         </div>
       </div>
@@ -16,15 +16,15 @@
       <div class="col-12">
         <div class="text-center m-t-10 m-b-10">
           <button class="btn btn-primary cursor-pointer" (click)="enableQuestion ? nextQuestion(true) : (enableQuestion = true)"
-            [disabled]="enableQuestion && responseUserText?.length < 20 ">
+            [disabled]="enableQuestion && responseUserText?.length < 20" *ngIf = "questions[indexQuestion]">
             <i class="fa m-r-5" [ngClass]="enableQuestion ? 'fa-arrow-right' : 'fa-check'"></i>
             {{enableQuestion ? 'Próxima' : 'Responder'}}
           </button>
-          <button class="btn btn-danger cursor-pointer" (click)="nextQuestion(false)">
+          <button class="btn btn-danger cursor-pointer" (click)="nextQuestion(false)" *ngIf = "questions[indexQuestion]">
             <i class="fa fa-times m-r-5"></i>
             Pular
           </button>
-          <button class="btn btn-success cursor-pointer" *ngIf="contQuestionAnswered >= 2" (click)="finishArticle()">
+          <button class="btn btn-success cursor-pointer" *ngIf="contQuestionAnswered >= 2 || !questions[indexQuestion]" (click)="finishArticle()">
             <i class="fa fa-flag-checkered m-r-5"></i>
             Concluir
           </button>
@@ -40,7 +40,10 @@
             <img class="img-radius img-chat m-t--10" src="assets/images/chatbot-icon.jpg" alt="Generic placeholder image">
           </a>
           <div class="media-body chat-menu-content m-t-10">
-            <p class="chat-cont">{{descriptionTheme}}</p>
+            <p class="chat-cont">
+              <span>O tema selecionado para o seu artigo foi:</span>
+              <span class = "text-bold">{{descriptionTheme}}</span>
+            </p>
             <p class="chat-cont">Vamos prosseguir?</p>
           </div>
         </div>
@@ -51,7 +54,7 @@
           </button>
           <button class="btn btn-danger cursor-pointer" (click)="nextTopicQuestion()">
             <i class="fa fa-times m-r-5"></i>
-            Outro tema
+            Quero outro tema
           </button>
         </div>
       </div>
@@ -71,7 +74,7 @@
     <div class="col-12">
       <textarea rows="18" class="form-control note-editor note-editor-margin" [(ngModel)]="responseUserText" [disabled]="!enableQuestion"></textarea>
       <div class="note-editor__count-words" *ngIf="responseUserText">
-        <p [ngClass]="responseUserText?.length >= 20 ? 'color-green' : 'color-red'">{{responseUserText?.length}}
+        <p [ngClass]="responseUserText?.length >= 20 ? 'color-green' : 'color-red'" class = "m-l-5">{{responseUserText?.length}}
           letras</p>
       </div>
       <div class="text-center">

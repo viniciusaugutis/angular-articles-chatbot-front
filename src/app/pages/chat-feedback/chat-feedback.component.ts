@@ -44,7 +44,7 @@ export class ChatFeedbackComponent implements OnInit, AfterViewChecked {
     if (this.loading) {
       return;
     }
-    this.message = this.factoryMessage(this.textUser, false);
+    this.message = this.factoryMessage(text ? text : this.textUser, false);
     this.conversation.push(this.message);
 
     if (this.chatbotScriptConversation[this.indexScript - 1] && this.chatbotScriptConversation[this.indexScript - 1].model) {
