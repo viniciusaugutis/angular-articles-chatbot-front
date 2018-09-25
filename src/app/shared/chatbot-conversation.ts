@@ -74,7 +74,7 @@ const CHAT_CONVERSATION_FEEDBACK = [
     typeMessage: 'text'
   },
   {
-    text: 'Ahhh… Quero te lembrar que se você adicionar imagens no seu artigo, suas chances de atrair mais clientes aumentam.',
+    text: 'Ahhh… Quero te lembrar que se você adicionar imagens no seu artigo, suas chances de atrair mais visitantes aumentam.',
     model: null,
     nextNow: true,
     typeMessage: 'text'
