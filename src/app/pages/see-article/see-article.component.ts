@@ -38,6 +38,7 @@ export class SeeArticleComponent implements OnInit {
             this.tags.keywords = this.article.meta && this.article.meta.keywords ? this.article.meta.Keywords : [];
             this.tags.description = this.article.seoMetaDescription;
             this.seoService.generateSeo(this.tags, this.route);
+            console.log(this.article);
           } else {
             this.articleService.findById(this.route.snapshot.params.id.toString()).subscribe(article => {
               this.article = article;

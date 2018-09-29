@@ -43,7 +43,8 @@ export class EditArticleComponent implements OnInit {
         this.articleUtils = JSON.parse(currentArticleUtils);
         setTimeout(() => {
           this.article.content = this.articleUtils.content;
-          this.article.meta = this.article.meta || {};
+          this.article.meta = this.articleUtils.meta || {};
+          this.article.articleCategory = this.articleUtils.articleCategory;
           this.article.meta.keywords = this.articleUtils.meta.keywords.map(keyword => {
             return keyword.name;
           });
@@ -61,7 +62,7 @@ export class EditArticleComponent implements OnInit {
   }
 
   public viewArticle() {
-    this.article.articleCategory.id = this.articleUtils.articleCategory.id || '1';
+    // this.article.articleCategory.id = this.articleUtils.articleCategory.id || '1';
     this.articleService.create(this.article).subscribe(response => {
       this.articleUtilsService.updateArticleUtils(this.article);
       this.router.navigate(['/artigo', response.id]);

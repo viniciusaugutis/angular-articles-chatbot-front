@@ -80,7 +80,7 @@ const CHAT_CONVERSATION_FEEDBACK = [
     typeMessage: 'text'
   },
   {
-    text: '  Estou te enviando para lá… Foi um prazer e espero te ver mais vezes aqui! Byeeeee',
+    text: 'Estou te enviando para lá… Foi um prazer e espero te ver mais vezes aqui! Byeeeee',
     model: 'go-article',
     nextNow: false,
     typeMessage: 'text-button'
